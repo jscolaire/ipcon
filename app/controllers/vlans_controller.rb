@@ -1,0 +1,2 @@
+class VlansController < ApplicationController
+end

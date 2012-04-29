@@ -1,0 +1,19 @@
+<h1>Edición de red</h1>
+
+<% form_for(@network) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :vlan_id %><br />
+    <%= f.collection_select(:vlan_id,Vlan.all,:id,:to_s,:include_blank => true) %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Cancelar', @network %>

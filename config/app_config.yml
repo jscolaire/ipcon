@@ -1,0 +1,11 @@
+development:
+  domain: localhost:3000
+  brand: ipcon
+  codename: ipcon
+  log: log/ipcon.log
+
+test:
+  domain: test.host
+
+production:
+  domain: example.com

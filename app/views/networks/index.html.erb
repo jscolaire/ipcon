@@ -1,0 +1,59 @@
+<% title "Redes gestionadas" %>
+<% content_for :actions do %>
+  <% render_navigation :items => @actions, :renderer => :links %>
+<% end %>
+<table class="ips table table-condensed">
+  <thead>
+    <th>LAN</th>
+    <th>Nombre</th>
+    <th>VLAN</th>
+  </tr>
+</thead>
+<tbody>
+
+  <%
+      par = 1
+  for network in @networks
+    par = 1 - par
+  %>
+<tr>
+  <td style="text-align: right;"><%= link_to(h(network),network) %>
+  <% if logged_in? %>
+      <%= link_to(
+        content_tag(:i,"",:class => "icon-edit"),
+        edit_network_path(network),
+        :title => "Editar") -%>
+
+      <%= link_to(
+        content_tag(:i,"",:class => "icon-trash"),
+        network,:confirm => "¿Está seguro de borrar la red?",
+        :method => :delete,
+        :title => "Borrar") -%>
+
+      <%= link_to(
+        content_tag(:i,"",:class => "icon-eye-open"),
+        network,
+        :title => "Ver") -%>
+
+      <%= link_to(
+        content_tag(:i,"",:class => "icon-resize-small"),
+        {:action => 'split',:id => network.id},
+        {:title => "Dividir"}) -%>
+    <% end %>
+</td>
+  <td>
+    <%=h network.name %>
+    </td>
+  </td>
+  <td>
+    <% if network.vlan %>
+      <%= link_to(h(network.vlan.name),network.vlan) %>
+    <% else %>
+      &nbsp;
+    <% end %>
+  </td>
+</tr>
+<% end %>
+</tbody>
+</table>
+

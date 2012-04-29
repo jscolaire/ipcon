@@ -1,0 +1,33 @@
+<h1>Modificación de IP</h1>
+
+<% form_for(@ip) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :hostname %><br />
+    <%= f.text_field :hostname %>
+  </p>
+  <p>
+    <%= f.label :label %><br />
+    <%= f.text_field :label %>
+  </p>
+  <p>
+    <%= f.label :activo %><br />
+    <%= text_field :activo_sup, :name %>
+  </p>
+  <p>
+    <%= f.label :gw %>
+    <%= f.check_box(:gw,{},true,false) %>
+  </p>
+  <p>
+    <%= f.label :hpsrp %>
+    <%= f.check_box(:hpsrp,{},true,false) %>
+  </p>
+  <p>
+    <%= f.label :temporal %>
+    <%= f.check_box(:temporal,{},true,false) %>
+  </p>
+    <%= f.submit "Modificar" %>
+<% end %>
+
+<a href="/networks/<%= @ip.network.id %>#<%= @ip.ip %>">Volver</a>

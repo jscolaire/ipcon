@@ -1,0 +1,49 @@
+<% content_for :actions do %>
+  <% render_navigation :items => @actions, :renderer => :links %>
+<% end %>
+<div class="navigation">
+  <ul>
+    <li><%= link_to(h('Editar'), edit_network_path(@network)) %></li>
+    <li><%= link_to(h("Resuelve"),:action => 'resuelve', :id => @network.id) %></li>
+    <li><%= link_to(h("Split"),:action => 'split', :id => @network.id) %></li>
+    <li><%= link_to(h("Imprimir"), :action => 'net2pdf', :id => @network.id) %></li>
+  </ul>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+    <div>
+      <div class="title"><%= h(@network.name) %></div><br />
+      <table style="width: 100%;border-collapse: separate;border-spacing: 2px;" class="well">
+        <tr>
+          <td class="label label-info">VLAN</td>
+          <td><%= @network.vlan %></td>
+        </tr>
+        <tr>
+          <td class="label label-info">Hosts</td>
+          <td><%= @network.hosts %></td>
+        </tr>
+        <tr>
+          <td class="label label-info">Range</td>
+          <td><%= @network.range %></td>
+        </tr>
+        <tr>
+          <td class="label label-info">Broadcast</td>
+          <td><%= @network.broadcast %></td>
+        </tr>
+        <tr>
+          <td class="label label-info">Gateway</td>
+          <td><%= @network.gateway %></td>
+        </tr>
+        <tr>
+          <td class="label label-info">Ocupación</td>
+          <td><%= @network.ocupacion %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="well">
+      <div><%= render :partial => 'networks/legend' %></div>
+    </div>
+  </div>
+  <div class="span8"><%= render :partial => 'ips/ips' %></div>
+
+</div>
