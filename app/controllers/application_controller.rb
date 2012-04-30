@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def check_login
     $log.debug "target location stored in #{session[:return_to]}"
     $log.debug "valuating check_login"
+    session[:return_to] = store_target_location
     if logged_in?
       $log.debug "you are logged in"
       @login_items = [
@@ -53,11 +54,14 @@ class ApplicationController < ActionController::Base
   def network_actions
     [
       { :key => :edit, :name => name_for_button("edit"),
-        :url => network_path,
+        :url => edit_network_path,
         :options => { :container_class => 'btn-group', :class => 'btn', :title => 'Edit' } },
       { :key => :split, :name => name_for_button("resize-small"),
         :url => url_for(:action => 'split'),
         :options => { :class => 'btn', :title => "Split net in two subnets" } },
+      { :key => :destroy, :name => name_for_button("trash"),
+        :url => network_path,
+        :options => { :method => :delete, :class => 'btn', :title => "Delete" } },
       { :key => :print, :name => name_for_button('print'),
         :url => url_for(:action => 'print'),
         :options => { :class => 'btn', :title => "Print" } }
