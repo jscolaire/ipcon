@@ -1,21 +1,20 @@
 TemplateNew::Application.routes.draw do
   match 'dashboard' => 'dashboard#index', :as => :dashboard
-  match 'user/edit' => 'users#edit', :as => :edit_current_user
 
-  match 'signup' => 'users#new', :as => :signup
-
+  match 'user/edit' => 'sessions#edit', :as => :edit_current_user
   match 'logout' => 'sessions#destroy', :as => :logout
-
   match 'login' => 'sessions#new', :as => :login
+  match 'update' => 'sessions#update', :as => :update
+
+  match 'switch_status' => 'networks#switch_status', :as => :switch_status
 
   resources :sessions
-
-  resources :users
 
   resources :networks
   resources :vlans
   resources :activos
-  resources :ips
+  resources :sips
+  resources :tags
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

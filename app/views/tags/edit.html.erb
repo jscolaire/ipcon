@@ -1,0 +1,14 @@
+<h1>Edición de tag</h1>
+
+<% form_for(@tag) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+
+<% end %>

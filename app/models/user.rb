@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username
   validates_uniqueness_of :username
-  validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
-  validates_presence_of :password, :on => :create
+  validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "Should only contain letters, numbers, or .-_@"
+  validates_presence_of :password, :on => :create, :message => "Password can't be blank"
   validates_confirmation_of :password
-  validates_length_of :password, :minimum => 8, :allow_blank => true
+  validates_length_of :password, :minimum => 8, :allow_blank => false
 
   # login can be either username or email address
   def self.authenticate(login, pass)
@@ -25,9 +25,8 @@ class User < ActiveRecord::Base
   private
 
   def prepare_password
-    unless password.blank?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = encrypt_password(password)
-    end
+    self.password_salt = BCrypt::Engine.generate_salt
+    self.password_hash = encrypt_password(password)
   end
+
 end

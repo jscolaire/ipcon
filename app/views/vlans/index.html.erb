@@ -1,0 +1,25 @@
+<% title "Vlans gestionadas" %>
+<%= will_paginate @vlans %>
+<% content_for :actions do %>
+  <% render_navigation :items => vlans_actions, :renderer => :links %>
+<% end %>
+<table class="table">
+  <thead>
+    <th>Tag</th>
+    <th>Name</th>
+    <th>Associated networks</th>
+  </thead>
+  <tbody>
+    <% for vlan in @vlans %>
+      <tr>
+        <td style="text-align: right;"><%= vlan.tag %></td>
+        <td><%= vlan.name %></td>
+        <td>
+          <% vlan.networks.each do |net| %>
+            <%= link_to(h("#{net} - #{net.name}"), network_path(net))  %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

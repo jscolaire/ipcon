@@ -1,20 +1,28 @@
 class ApplicationController < ActionController::Base
   include ControllerAuthentication
+  helper :all
 
   layout 'application-sb'
   protect_from_forgery
 
-  before_filter :check_login
+  before_filter :login_items
+  before_filter :log_location
 
   $log = Log4r::Logger.new("appctrl")
   $log.add(LOGFILE)
 
-  def check_login
-    $log.debug "target location stored in #{session[:return_to]}"
-    $log.debug "valuating check_login"
-    session[:return_to] = store_target_location
+  private
+
+  def log_location
+    $log.debug("your location is #{session[:return_to]}")
+  end
+
+  def remove_location
+    session[:return_to] = nil
+  end
+
+  def login_items
     if logged_in?
-      $log.debug "you are logged in"
       @login_items = [
         { :key => :profile,
           :name => "<i class='icon-user icon-white'></i>&nbsp;#{current_user.username}",
@@ -24,55 +32,12 @@ class ApplicationController < ActionController::Base
             :options => { :container_class => 'nav pull-right' } }
       ]
     else
-      $log.debug "you are logged out, please log in"
       @login_items = [
-        :key => :login, :name => "Login", :url => "login",
+        :key => :login, :name => "Login", :url => "/login",
         :options => { :container_class => 'nav pull-right' }
       ]
-      $log.debug @login_items.to_s
     end
-    return @login_items
+
   end
 
-  def networks_actions
-    [
-      { :key => :add, :name => name_for_button("plus"),
-        :url => new_network_path,
-        :options => { :if => Proc.new { logged_in? },
-                      :container_class => 'btn-group',
-                      :class => "btn",
-                      :title => "New network" }
-        },
-        { :key => :print, :name => name_for_button("print"),
-          :url => url_for(:action => 'print'),
-          :options => { :container_class => 'btn-group',
-                        :class => 'btn',
-                        :title => 'Print network'} }
-    ]
-  end
-
-  def network_actions
-    [
-      { :key => :edit, :name => name_for_button("edit"),
-        :url => edit_network_path,
-        :options => { :container_class => 'btn-group', :class => 'btn', :title => 'Edit' } },
-      { :key => :split, :name => name_for_button("resize-small"),
-        :url => url_for(:action => 'split'),
-        :options => { :class => 'btn', :title => "Split net in two subnets" } },
-      { :key => :destroy, :name => name_for_button("trash"),
-        :url => network_path,
-        :options => { :method => :delete, :class => 'btn', :title => "Delete" } },
-      { :key => :print, :name => name_for_button('print'),
-        :url => url_for(:action => 'print'),
-        :options => { :class => 'btn', :title => "Print" } }
-    ]
-  end
-
-  private
-  # make a html button for action
-  # icon is the icon of Glyphicons we want
-  # see Twitter bootstrap for a list of icons
-  def name_for_button(icon)
-    "<i class='icon-#{icon}'></i>"
-  end
 end

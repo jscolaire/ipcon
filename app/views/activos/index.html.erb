@@ -1,0 +1,7 @@
+<% title "Activos gestionados" %>
+<%= will_paginate @activos %>
+<% content_for :actions do %>
+  <% render_navigation :items => activos_actions, :renderer => :links %>
+<% end %>
+<%= render :partial => 'activos' %>
+

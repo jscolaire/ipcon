@@ -50,7 +50,10 @@ SimpleNavigation::Configuration.run do |navigation|
     #                            against the current URI.  You may also use a proc, or the symbol <tt>:subpath</tt>.
     #
     primary.item :dashboard, 'Dashboard', dashboard_path
-    primary.item :network, 'Networks', networks_path, :highlights_on => :subpath
+    primary.item :networks, 'Networks', networks_path, :highlights_on => /\/networks/
+    primary.item :networks, 'Vlans', vlans_path
+    primary.item :activos, 'Activos', activos_path, :highlights_on => /\/activos/
+    primary.item :tags, 'Tags', tags_path, :highlights_on => /\/tags/
 
     # Add an item which has a sub navigation (same params, but with block)
     #primary.item :key_2, 'name', url, options do |sub_nav|

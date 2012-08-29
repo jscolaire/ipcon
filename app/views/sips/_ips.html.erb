@@ -1,0 +1,52 @@
+<table class="table table-condensed">
+  <th width="125">IP</th>
+  <th width="150">Activo asociado</th>
+  <th width="200">Hostname</th>
+  <th width="300">Descripción</th>
+  <% if logged_in? %>
+    <th>&nbsp;</th>
+  <% end %>
+  <%
+    @ips.each {|ip|
+      cl = "assigned" if ip.assigned
+      cl = "gw" if ip.gw
+      cl = "hsrp" if ip.hpsrp
+      cl = "reserved" if ip.reserved
+      cl = "temporal" if ip.temporal
+    %>
+    <tr class="<%= cl %>" id="<%= ip.ip %>">
+  <td class="txtR">
+    <%= link_to(h("#{ip}/#{ip.network.bits}"),
+        edit_sip_path(ip),
+        :name => ip.ip,
+        :title => ip.network.human) %></td>
+  <td width="150" id="ip-act-<%= ip.id %>">
+      <% if ip.activo != nil %>
+        <%= link_to(h(ip.activo),ip.activo, :title => ip.activo.title ) %>
+      <% else %>
+        <%= link_to(h(ip.activo),ip.activo) %>
+      <% end %>
+  </td>
+  <td width="200" id="ip-hn-<%= ip.id %>">
+    <%= h(ip.hostname) %>
+  </td>
+  <td width="200" id="ip-lab-<%= ip.id %>">
+    <%= ip.label %>
+  </td>
+  <%
+      if logged_in?
+        icon = "icon-trash"
+        icon = "icon-check" if ! ip.assigned
+        title = "Ocupar la IP"
+        title = "Liberar la IP" if ip.assigned
+%>
+    <td class="actions">
+      <%= link_to(
+                    content_tag(:i,"",:class => icon,:title => title),
+        :action => 'switch_status',
+        :id => ip.id) -%>
+    </td>
+  <% end %>
+</tr>
+<% } %>
+</table>

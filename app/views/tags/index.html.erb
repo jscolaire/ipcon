@@ -1,0 +1,22 @@
+<% title "Tags gestionadas" %>
+<% content_for  :actions do %>
+  <% render_navigation :items => actions, :renderer => :links %>
+<% end %>
+<table class="table" width="75%">
+  <caption>Listado de tags</caption>
+  <tr class="head">
+    <th width="100">Tag</th>
+    <th width="500">Activos asociados</th>
+  </tr>
+
+  <%
+      even = 1
+  for tag in @tags
+    even = 1 - even
+  %>
+<tr class="<%= (even == 0 ? 'even' : 'odd') %>">
+  <td class="txtR"><%= link_to(h(tag), tag, :class => 'tag') %></td>
+  <td><%= render :inline => activos_list(tag) %></td>
+</tr>
+  <% end %>
+</table>

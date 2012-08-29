@@ -1,0 +1,20 @@
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Tags</th>
+      <th>IP's</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for activo in @activos %>
+      <tr>
+        <td><%= activo.name %></td>
+        <td><%= activo.description %></td>
+        <td><%= render :inline => tags_list(activo) %></td>
+        <td><%= activo.sips.length %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

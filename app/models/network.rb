@@ -1,46 +1,54 @@
 class Network < ActiveRecord::Base
+  $log = Log4r::Logger.new("network model")
+  $log.add(LOGFILE)
 
-#validates_uniqueness_of :network
+  before_create :setup
+  after_create :setips
+
+  validates_uniqueness_of :prefix
   validates_presence_of :name
 
-  has_many :ips,
+  has_many :sips,
     :dependent => :delete_all
 
   has_one :gateway,
-    :class_name => "Ip",
-    :foreign_key => "network_id"
+    :class_name => "Sip",
+    :foreign_key => "gw_id"
 
   belongs_to :vlan
 
-  def before_create
-
-    prefix =""
-    self.netmask = self.prefix.split("/")[1]
-    self.prefix.split(".")[0..2].each {|p|
-      prefix << p + "."
-    } 
-    self.network = self.prefix.split(".").last
-    self.prefix = prefix
-    if self.netmask == nil
-      self.netmask = 24
-    end
-    self.hosts = 2**(32 - self.netmask) - 2
-    self.first = self.network + 1
-    self.last = self.first + self.hosts - 1
-    self.bcast = self.first + self.hosts
-
+  def checkSubnet
   end
 
-  def after_create
-    create_ips(first,last)
+  def setup
+
+    # set prefix to NetAddr format
+    self.prefix = NetAddr::CIDR.create(self.prefix).to_s
+    # check if prefix is a existing subnet from networks
+    Network.all.each {|n|
+      if NetAddr::CIDR.create(n.prefix).contains?(self.prefix)
+        errors.add(:prefix,"This prefix is part of other network")
+        return false
+      end
+    }
+    true
+  end
+
+  def setips
+    net = NetAddr::CIDR.create(self.prefix)
+    net.range(1,net.size-2).each {|ip|
+      # Ip class is my class, whereas IP is ruby-ip class
+      Sip.new(:network_id => id,:ip => ip+net.netmask).save
+    }
   end
 
   def to_s
-    prefix + network.to_s + "/" + netmask.to_s
+    NetAddr::CIDR.create(prefix).to_s
   end
 
   def range
-    prefix + first.to_s + " - " + prefix + last.to_s
+    net = NetAddr::CIDR.create(prefix)
+    return net[1].ip + " - " + net[net.size-2].ip
   end
 
   def split
@@ -74,7 +82,11 @@ class Network < ActiveRecord::Base
   end
 
   def broadcast
-    prefix + bcast.to_s
+    NetAddr::CIDR.create(prefix).broadcast
+  end
+
+  def hosts
+    NetAddr::CIDR.create(prefix).size
   end
 
   # alias for gateway
@@ -82,17 +94,16 @@ class Network < ActiveRecord::Base
     self.gateway
   end
 
-  # ocupacion
   def ocupacion
-    ((ipsocup=Ip.all(:conditions => "network_id = #{id} and assigned='t'").length)*100) / (ips.size - 1)
+    ((ipsocup=Sip.all(:conditions => "network_id = #{id} and assigned='t'").length)*100) / (sips.size - 1)
   end
 
-  private
-  def create_ips(first,last)
-    for i in first..last
-      Ip.new(:ip => self.prefix + i.to_s,
-          :network_id => self.id).save
-    end
+  def bits
+    NetAddr::CIDR.create(prefix).bits
   end
 
+  def human
+    net = NetAddr::CIDR.create(prefix)
+    "#{net.network}/#{net.wildcard_mask}"
+  end
 end

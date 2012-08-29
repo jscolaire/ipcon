@@ -1,8 +1,9 @@
 class Activo < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
-  has_many :ips
+  has_many :sips
   belongs_to :activo
+  default_scope :order => "name"
 
   has_and_belongs_to_many :tags, :order =>  'tag'
 
@@ -26,7 +27,7 @@ class Activo < ActiveRecord::Base
 
   def title
     return raw_tags_list if description == nil
-    description + "\n" + raw_tags_list
+    description + " - " + raw_tags_list
   end
 
   def update_tags(tags)

@@ -1,0 +1,11 @@
+<%= form_tag('/update', :class=> 'well') do %>
+  <fieldset>
+  <%= label_tag "Old password" %>
+  <%= password_field_tag :old_password %>
+  <%= label_tag "New password" %>
+  <%= password_field_tag :password %>
+  <%= label_tag "Password confirmation" %>
+  <%= password_field_tag :password_confirmation %>
+</fieldset>
+  <%= submit_tag "Accept", :class => 'btn btn-primary' %>
+<% end %>

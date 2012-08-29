@@ -1,24 +1,29 @@
 <% title "Redes gestionadas" %>
 <% content_for :actions do %>
-  <% render_navigation :items => @actions, :renderer => :links %>
+  <% render_navigation :items => networks_actions, :renderer => :links %>
 <% end %>
-<table class="ips table table-condensed">
-  <thead>
-    <th>LAN</th>
-    <th>Nombre</th>
-    <th>VLAN</th>
-  </tr>
-</thead>
-<tbody>
+<% if @networks.length == 0 %>
+  <div class="hero-unit">
+    No existen redes gestionadas
+  </div>
+<% else %>
+  <table class="table">
+    <thead>
+      <th>LAN</th>
+      <th>Nombre</th>
+      <th>VLAN</th>
+    </tr>
+  </thead>
+  <tbody>
 
-  <%
-      par = 1
-  for network in @networks
-    par = 1 - par
-  %>
-<tr>
-  <td style="text-align: right;"><%= link_to(h(network),network) %>
-  <% if logged_in? %>
+    <%
+        par = 1
+    for network in @networks
+      par = 1 - par
+    %>
+  <tr>
+    <td style="text-align: right;"><%= link_to(h(network),network) %>
+    <% if logged_in? %>
       <%= link_to(
         content_tag(:i,"",:class => "icon-edit"),
         edit_network_path(network),
@@ -40,20 +45,20 @@
         {:action => 'split',:id => network.id},
         {:title => "Dividir"}) -%>
     <% end %>
-</td>
+  </td>
   <td>
     <%=h network.name %>
-    </td>
   </td>
-  <td>
-    <% if network.vlan %>
-      <%= link_to(h(network.vlan.name),network.vlan) %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </td>
+</td>
+<td>
+  <% if network.vlan %>
+    <%= network.vlan.tag.to_s + " - " + network.vlan.name %>
+  <% else %>
+    &nbsp;
+  <% end %>
+</td>
 </tr>
 <% end %>
 </tbody>
 </table>
-
+<% end %>

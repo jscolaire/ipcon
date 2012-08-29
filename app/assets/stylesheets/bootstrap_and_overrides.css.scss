@@ -1,0 +1,45 @@
+// Set the correct sprite paths
+$iconSpritePath: asset-url('glyphicons-halflings.png', image);
+$iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+.nav li a.selected { color: $linkColor; }
+body { padding-top: 60px; }
+@import "bootstrap-responsive";
+
+td.gw,td.hsrp,td.temporal,td.assigned {
+  width: 50px;
+}
+td.gw,tr.gw { background: lighten($green,25%) }
+td.hsrp,tr.hsrp { background: lighten($green,45%) }
+td.temporal,tr.temporal { background: lighten($yellow,35%) }
+
+td.assigned,tr.assigned { background: lighten($blue,45%) }
+
+
+//.xxs .xs .s .l .xl .xxl
+
+.tags-cloud {
+  a.xxs { font-size: 0.60em }
+  a.xs { font-size: 1em }
+  a.s { font-size: 1.75em }
+  a.l { font-size: 2.25em }
+  a.xl { font-size: 3em }
+  a.xxl { font-size: 3.75em }
+  text-align: center;
+  line-height: 2.5em;
+  h2 { text-align: left; }
+}
+
+.tags-cloud-mini {
+  a.xxs { font-size: 0.60em }
+  a.xs { font-size: 0.75em }
+  a.s { font-size: 1em }
+  a.l { font-size: 1.50em }
+  a.xl { font-size: 2em }
+  a.xxl { font-size: 2.50em }
+  text-align: center;
+  line-height: 2.5em;
+  h2 { text-align: left; }
+}

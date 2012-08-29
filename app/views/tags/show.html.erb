@@ -1,0 +1,26 @@
+<div class="navigation">
+  <ul>
+    <li><%= link_to(h('Editar'),edit_tag_path(@tag)) %></li>
+    <li><%= link_to(h('Borrar'),@tag,
+      :confirm => '¿Está seguro de borrar este tag?',
+      :method => :delete) if logged_in? %></li>
+    <li><%= link_to(h("Imprimir"), :action => 'tag2pdf', :id => @tag.id) %></li>
+  </ul>
+</div>
+<div class="clear"></div>
+
+<div id=left">
+  <div class="frame">
+    <div class="title"><%= h(@tag) %></div>
+    <div class="contenido">
+      <%= @tag.activos.length %> activos asociados
+    </div>
+  </div>
+</div>
+
+<div id="right">
+  <div>
+    <%= render :partial => 'activos/activos' %>
+  </div>
+</div>
+

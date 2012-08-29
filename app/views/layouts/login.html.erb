@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? APP_CONFIG[:name] + " " + yield(:title) : APP_CONFIG[:name] %></title>
+    <title><%= content_for?(:title) ? APP_CONFIG[:brand] + " " + yield(:title) : APP_CONFIG[:brand] %></title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -35,6 +35,7 @@
         </div>
         <div class="span4">&nbsp;</div>
         <div class="span4">
+            <div class="page-header"><%= content_tag :h1, yield(:title) if show_title? %></div>
           <div>
             <%= yield %>
           </div>

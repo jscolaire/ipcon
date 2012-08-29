@@ -1,24 +1,24 @@
 class NetworksController < ApplicationController
 
+  before_filter :login_required, :except => [ :index, :show ]
+  before_filter :remove_location, :only => [ :index,:show ]
   $log = Log4r::Logger.new("network")
   $log.add(LOGFILE)
 
   def index
-    $log.debug("requested list networks")
-    @networks = Network.all
-    @actions = networks_actions
+    $log.info("Requested list networks")
+    @networks = Network.order("prefix")
   end
 
   def show
-    $log.debug("requested show network #{params[:id]}")
+    $log.debug("Requested show network #{params[:id]}")
     @network = Network.find(params[:id])
-    $log.info("network #{params[:id]} is #{@network.name}")
-    @ips = @network.ips
-    $log.debug("generating actions for network #{params[:id]}")
-    @actions = network_actions
+    $log.info("Network #{params[:id]} is #{@network.name}")
+    @ips = @network.sips
   end
 
   def new
+    $log.debug "Requested creating new network"
     @network = Network.new
 
     respond_to do |format|
@@ -31,13 +31,16 @@ class NetworksController < ApplicationController
   end
 
   def create
+    $log.info("Trying for create a network #{params[:network][:prefix]}")
     @network = Network.new(params[:network])
 
     respond_to do |format|
       if @network.save
+        $log.info("Network #{@network} was successfully created.")
         flash[:notice] = 'Network was successfully created.'
         format.html { redirect_to(@network) }
       else
+        $log.error("Network #{@network} wasn't successfully created.")
         flash[:error] = "Network wasn't successfully created."
         format.html { render :action => "new", :layout => 'application' }
       end
@@ -54,4 +57,13 @@ class NetworksController < ApplicationController
     end
   end
 
+  def switch_status
+    ip = Sip.find(params[:id])
+    ip.free
+    ip.save
+    #ip.assigned = !ip.assigned
+    #ip.save
+    #redirect_to "/networks/#{ip.network.id}##{ip.ip}"
+    redirect_to "#{network_path(ip.network.id)}##{ip.ip}"
+  end
 end

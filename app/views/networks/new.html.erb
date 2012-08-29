@@ -1,15 +1,9 @@
 <% title 'Alta de red' %>
 
-<%= form_for @network, :html => { :class => 'form-vertical well span4' } do |f| %>
-  <fieldset class="control-group">
-    <%= f.label :prefix %>
-    <%= f.text_field :prefix %><span class="help-inline">CIDR format only</span>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </fieldset>
-  <fieldset>
-    <%= f.submit "Crear", :class => 'btn btn-primary' %>
-    <%= link_to(h('Cancelar'),networks_path, :class => 'btn') %>
-  </fieldset>
+<%= simple_form_for @network, :html => { :class => 'form-horizontal well' } do |f| %>
+  <%= f.input :prefix %>
+  <%= f.input :name %>
+  <%= f.button :submit, :class => "btn btn-primary" %>
+  <%= link_to "Cancel", "#{networks_path}", :class => "btn btn-sucess" %>
 <% end %>
 

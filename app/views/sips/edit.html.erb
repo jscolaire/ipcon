@@ -1,0 +1,13 @@
+<% title "Modificación de IP" %>
+
+<%= simple_form_for(@ip, :html => { :class => 'well form-horizontal' }) do |f|  %>
+  <%= f.input :hostname %>
+  <%= f.input :label %>
+  <%= f.input :activo %>
+  <%= f.input :gw, :as => :boolean %>
+  <%= f.input :hpsrp, :as => :boolean %>
+  <%= f.input :temporal, :as => :boolean %>
+  <%= f.button :submit, :class=> "btn btn-primary" %>
+  <%= link_to "Cancel", "#{network_path(@ip.network_id)}##{@ip.ip}", :class => "btn btn-success" %>
+<% end %>
+
