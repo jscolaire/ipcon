@@ -6,13 +6,13 @@ module NetworksHelper
         :options => { :if => Proc.new { logged_in? },
                       :container_class => 'btn-group',
                       :class => "btn",
-                      :title => "New network" }
+                      :title => "Nueva red" }
         },
         { :key => :print, :name => name_for_button("print"),
-          :url => url_for(:action => 'print'),
+          :url => url_for('networks.pdf'),
           :options => { :container_class => 'btn-group',
                         :class => 'btn',
-                        :title => 'Print network'} }
+                        :title => 'Imprimir redes'} }
     ]
   end
 
@@ -33,6 +33,7 @@ module NetworksHelper
         :url => network_path,
         :options => { :if => Proc.new { logged_in? },
                       :method => :delete,
+                      :confirm => "¿ Estás seguro de borrar la red ?",
                       :class => 'btn', :title => "Delete" } },
       { :key => :print, :name => name_for_button('print'),
         :url => url_for(:action => 'print'),

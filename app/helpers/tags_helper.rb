@@ -1,11 +1,24 @@
 module TagsHelper
 
-  def actions
+  def tags_actions
     [
       :key => :print, :name => name_for_button("print"),
       :url => url_for('print'),
       :options => { :class => 'btn',
-                    :title => "Print vlans managed" }
+                    :title => "Print vlans managed" },
+    ]
+  end
+
+  def tag_actions
+    [
+      { :key => :edit, :name => name_for_button("edit"),
+      :url => edit_tag_path(@tag),
+      :options => { :class => 'btn',
+                    :title => "Editar etiqueta" } },
+                    { :key => :delete, :name => name_for_button("trash"),
+      :url => url_for(:action => 'delete'),
+      :options => { :class => 'btn',
+                    :title => 'Borrar la etiqueta seleccionada' } }
     ]
   end
 

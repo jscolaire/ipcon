@@ -1,12 +1,12 @@
-<% title "Tags gestionadas" %>
+<% title "Etiquetas gestionadas" %>
 <% content_for  :actions do %>
-  <% render_navigation :items => actions, :renderer => :links %>
+  <% render_navigation :items => tags_actions, :renderer => :links %>
 <% end %>
 <table class="table" width="75%">
-  <caption>Listado de tags</caption>
   <tr class="head">
-    <th width="100">Tag</th>
-    <th width="500">Activos asociados</th>
+    <th>Etiquetas</th>
+    <th>Descripción</th>
+    <th>Activos asociados</th>
   </tr>
 
   <%
@@ -15,8 +15,21 @@
     even = 1 - even
   %>
 <tr class="<%= (even == 0 ? 'even' : 'odd') %>">
-  <td class="txtR"><%= link_to(h(tag), tag, :class => 'tag') %></td>
-  <td><%= render :inline => activos_list(tag) %></td>
+  <td><%= link_to(h(tag),tag) %></td>
+  <td><%= tag.description %></td>
+  <td><%= tag.activos.length %></td>
+  <% if logged_in? %>
+    <td class="actions">
+      <%= link_to(
+        content_tag(:i,"",:class => "icon-edit", :title => "Editar"),
+          edit_tag_path(tag)) %>
+        <%= link_to(
+          content_tag(:i,"",:class => "icon-trash",:title => "Borrar" ),
+          tag,:confirm => "¿Está seguro de borrar la etiqueta?",
+          :method => :delete,
+          :id => tag.id) -%>
+    </td>
+  <% end %>
 </tr>
   <% end %>
 </table>

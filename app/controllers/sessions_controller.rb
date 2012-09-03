@@ -14,16 +14,16 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       session[:user_username] = user.username
-      redirect_to_target_or_default root_url, :flash => { :success => "Logged in successfully." }
+      redirect_to_target_or_default root_url, :flash => { :success => "Entrada a la aplicación correcta" }
     else
-      flash.now[:error] = "Invalid login or password."
+      flash.now[:error] = "Nombre de usuario o contraseña incorrecta."
       render :action => 'new', :layout => 'login'
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, :flash => { :info => "You have been logged out." }
+    redirect_to root_url, :flash => { :info => "Desconexión de la aplicación." }
   end
 
   def edit

@@ -1,3 +1,7 @@
+<% title @tag.tag %>
+<% content_for :actions do %>
+  <% render_navigation :items => tag_actions, :renderer => :links %>
+<% end %>
 <div class="navigation">
   <ul>
     <li><%= link_to(h('Editar'),edit_tag_path(@tag)) %></li>

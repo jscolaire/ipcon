@@ -6,16 +6,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :login_items
-  before_filter :log_location
 
   $log = Log4r::Logger.new("appctrl")
   $log.add(LOGFILE)
 
   private
-
-  def log_location
-    $log.debug("your location is #{session[:return_to]}")
-  end
 
   def remove_location
     session[:return_to] = nil

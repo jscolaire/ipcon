@@ -1,14 +1,10 @@
-<h1>Edición de tag</h1>
+<% title "Modificación de etiqueta" %>
+<%= session[:return_to] %>
 
-<% form_for(@tag) do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :tag %><br />
-    <%= f.text_field :tag %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-
+<%= simple_form_for(@tag,:html => { :class => 'well form-horizontal' }) do |f| %>
+<%= f.input :tag %>
+<%= f.input :description %>
+<%= f.button :submit, :class => "btn btn-primary" %>
+<%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
 <% end %>
+

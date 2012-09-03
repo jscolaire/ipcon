@@ -6,6 +6,10 @@ development:
 
 test:
   domain: test.host
+  brand: ipcon test
+  codename: ipcon2
+  log: log/ipcon.log
+
 
 production:
   domain: example.com

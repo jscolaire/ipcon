@@ -46,6 +46,7 @@ module ControllerAuthentication
   private
 
   def store_target_location
+    $log.info "You are in #{request.url}"
     session[:return_to] = request.url
   end
 end

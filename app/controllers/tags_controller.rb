@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
 
   before_filter :login_required, :except => [ :index, :show ]
-  before_filter :remove_location, :only => [ :index,:show ]
+  before_filter :store_target_location, :except => :edit
   $log = Log4r::Logger.new("tags")
   $log.add(LOGFILE)
 

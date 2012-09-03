@@ -24,6 +24,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'i18n'
 gem 'jquery-rails'
 gem 'log4r'
 gem 'netaddr'
@@ -34,7 +35,7 @@ gem 'simple-navigation'
 gem 'simple_form'
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'bootstrap-will_paginate'
-
+gem 'prawn_rails'
 
 
 # To use ActiveModel has_secure_password
