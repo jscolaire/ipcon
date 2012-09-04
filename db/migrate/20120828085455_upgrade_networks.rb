@@ -15,6 +15,6 @@ class UpgradeNetworks < ActiveRecord::Migration
   end
 
   def down
-    raise ActiveRecord::IrreversibleMigration
+    raise ActiveRecords::IrreversibleMigration
   end
 end
