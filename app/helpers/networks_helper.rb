@@ -36,7 +36,7 @@ module NetworksHelper
                       :confirm => "¿ Estás seguro de borrar la red ?",
                       :class => 'btn', :title => "Delete" } },
       { :key => :print, :name => name_for_button('print'),
-        :url => url_for(:action => 'print'),
+        :url => url_for("#{network_path}.pdf"),
         :options => { :class => 'btn',
                       :title => "Print" } }
     ]

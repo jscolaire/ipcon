@@ -10,7 +10,7 @@
   <tbody>
     <% for activo in @activos %>
       <tr>
-        <td><%= activo.name %></td>
+        <td><%= link_to(h(activo.name),activo) %></td>
         <td><%= activo.description %></td>
         <td><%= render :inline => tags_list(activo) %></td>
         <td><%= activo.sips.length %></td>

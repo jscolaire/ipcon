@@ -8,24 +8,17 @@ class ActivosController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      #format.html {
-        #render :partial => 'activos',
-               #:layout => 'application-sb'
-      #}
-      format.xml  { render :xml => @activos }
+      format.pdf { render :layout => false }
+      #format.xml  { render :xml => @activos }
     end
   end
 
   # GET /activos/1
   # GET /activos/1.xml
   def show
-    store_location
     @activo = Activo.find(params[:id])
 
-    breadcrumbs(
-        @activo.parents << ["Activos","../activos"])
-
-    @ips = @activo.ips
+    @ips = @activo.sips
 
     respond_to do |format|
       format.html # show.html.erb

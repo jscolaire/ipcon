@@ -10,7 +10,7 @@ class NetworksController < ApplicationController
     @networks = Network.order("prefix")
     respond_to do |format|
       format.html
-      format.pdf
+      format.pdf { render :layout => false }
     end
   end
 
@@ -19,6 +19,10 @@ class NetworksController < ApplicationController
     @network = Network.find(params[:id])
     $log.info("Network #{params[:id]} is #{@network.name}")
     @ips = @network.sips
+    respond_to do |format|
+      format.html
+      format.pdf { render :layout => false }
+    end
   end
 
   def new
@@ -76,26 +80,6 @@ class NetworksController < ApplicationController
 
     pdf = Prawn::Document.new do
 
-      font "Helvetica", :size => 8
-      text "Servicio de Informática - Departamento de Sistemas - #{Time.now.strftime('%d/%m/%Y')}"
-      text "Listado de red - #{network.name}", :size => 14
-
-      text "Nombre de red: #{network.name}"
-      text "Dirección de red: #{network}"
-      text "Broadcast: #{network.broadcast}"
-      text "Puerta de enlace: #{network.gw}"
-      text "VLAN: #{network.vlan}"
-
-      move_down 25
-
-      data = Array.new
-
-      network.ips.each {|ip|
-        data.push [
-          ip.ip,
-          ip.hostname,
-          ip.label ] if ip.assigned
-      }
 
       if data.length == 0
         text "Esta red no tiene IP's asignadas"

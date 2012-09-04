@@ -7,14 +7,20 @@ prawn_document do |pdf|
     pdf.move_down 25
 
     data = Array.new
-    data.push [ "Red","Nombre" ]
+    data.push [ "Red","Nombre", "VLAN" ]
     @networks.each {|net|
-        data.push [ net.prefix,net.name ]
+        if net.vlan
+            vlan = net.vlan.to_s
+        else
+            vlan = ""
+        end
+        data.push [ net.prefix,net.name, vlan ]
     }
 
-    header = %w["Red", "Nombre"]
-
     pdf.font "Helvetica", :size => 8
-    pdf.table data, :header => true
+    pdf.table data,
+        :header => true,
+        :row_colors => [ "f0f0f0", "ffffff" ],
+        :cell_style => { :size => 8 }
 end
 

@@ -1,0 +1,15 @@
+<% title @activo %>
+<% content_for :actions do %>
+  <% render_navigation :items => network_actions, :renderer => :links %>
+<% end %>
+<div class="hero-unit">
+  <h2><%= @activo.description %></h2>
+<%= render :inline => tags_list(@activo) %>
+</div>
+
+<div>
+  <% if @ips.length > 0 %>
+    <%= render :partial => 'sips/ips' %>
+  <% end %>
+</div>
+

@@ -7,4 +7,5 @@ class Vlan < ActiveRecord::Base
   def to_s
     tag.to_s + " - " + name
   end
+
 end
