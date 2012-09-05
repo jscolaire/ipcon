@@ -23,7 +23,12 @@ class Network < ActiveRecord::Base
   def setup
 
     # set prefix to NetAddr format
+    begin
     self.prefix = NetAddr::CIDR.create(self.prefix).to_s
+    rescue
+      errors.add(:prefix,"La red proporcionada no es válida")
+      return false
+    end
     # check if prefix is a existing subnet from networks
     Network.all.each {|n|
       if NetAddr::CIDR.create(n.prefix).contains?(self.prefix)
@@ -38,7 +43,7 @@ class Network < ActiveRecord::Base
     net = NetAddr::CIDR.create(self.prefix)
     net.range(1,net.size-2).each {|ip|
       # Ip class is my class, whereas IP is ruby-ip class
-      Sip.new(:network_id => id,:ip => ip+net.netmask).save
+      Sip.new(:network_id => id,:ip => ip).save
     }
   end
 

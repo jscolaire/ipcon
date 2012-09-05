@@ -2,3 +2,9 @@ es:
     will_paginate:
         previous_label: "Anterior"
         next_label: "Siguiente"
+
+    activerecord:
+      errors:
+        messages:
+          taken: "Ya existe un registro con este valor"
+          blank: "No puede tener un valor vacío"

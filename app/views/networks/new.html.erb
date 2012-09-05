@@ -3,7 +3,7 @@
 <%= simple_form_for @network, :html => { :class => 'form-horizontal well' } do |f| %>
   <%= f.input :prefix %>
   <%= f.input :name %>
-  <%= f.button :submit, :class => "btn btn-primary" %>
-  <%= link_to "Cancel", "#{networks_path}", :class => "btn btn-sucess" %>
+  <%= f.submit 'Crear red', :class => "btn btn-primary" %>
+  <%= link_to "Cancelar", "#{networks_path}", :class => "btn btn-sucess" %>
 <% end %>
 

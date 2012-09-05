@@ -48,7 +48,7 @@ class NetworksController < ApplicationController
         flash[:notice] = 'Network was successfully created.'
         format.html { redirect_to(@network) }
       else
-        $log.error("Network #{@network} wasn't successfully created.")
+        $log.error("Network wasn't successfully created.")
         flash[:error] = "Network wasn't successfully created."
         format.html { render :action => "new", :layout => 'application' }
       end
