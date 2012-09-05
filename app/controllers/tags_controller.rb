@@ -10,6 +10,7 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.pdf { render :layout => false }
       format.xml { render :xml => @tags }
     end
   end
@@ -20,6 +21,7 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.pdf { render :layout => false }
       format.xml { render :xml => @tag }
     end
   end

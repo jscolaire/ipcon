@@ -22,6 +22,7 @@ class ActivosController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.pdf { render :layout => false }
       format.xml  { render :xml => @activo }
     end
   end

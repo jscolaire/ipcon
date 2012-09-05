@@ -3,7 +3,7 @@ module TagsHelper
   def tags_actions
     [
       :key => :print, :name => name_for_button("print"),
-      :url => url_for('print'),
+      :url => url_for('tags.pdf'),
       :options => { :class => 'btn',
                     :title => "Print vlans managed" },
     ]
@@ -11,13 +11,19 @@ module TagsHelper
 
   def tag_actions
     [
+      { :key => :print, :name => name_for_button("print"),
+        :url => url_for("#{tag_path}.pdf"),
+        :options => { :class => 'btn',
+                      :title => 'Imprimir la etiqueta seleccionada' }},
       { :key => :edit, :name => name_for_button("edit"),
       :url => edit_tag_path(@tag),
-      :options => { :class => 'btn',
+      :options => { :if => Proc.new { logged_in? },
+                    :class => 'btn',
                     :title => "Editar etiqueta" } },
-                    { :key => :delete, :name => name_for_button("trash"),
+      { :key => :delete, :name => name_for_button("trash"),
       :url => url_for(:action => 'delete'),
-      :options => { :class => 'btn',
+      :options => { :if => Proc.new { logged_in? },
+                    :class => 'btn',
                     :title => 'Borrar la etiqueta seleccionada' } }
     ]
   end

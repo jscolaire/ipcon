@@ -7,7 +7,7 @@
   <%= f.input :gw, :as => :boolean %>
   <%= f.input :hpsrp, :as => :boolean %>
   <%= f.input :temporal, :as => :boolean %>
-  <%= f.button :submit, :class=> "btn btn-primary" %>
-  <%= link_to "Cancel", "#{network_path(@ip.network_id)}##{@ip.ip}", :class => "btn btn-success" %>
+  <%= f.submit 'Actualizar IP', :class=> "btn btn-primary" %>
+  <%= link_to "Cancelar", "#{network_path(@ip.network_id)}##{@ip.ip}", :class => "btn btn-success" %>
 <% end %>
 

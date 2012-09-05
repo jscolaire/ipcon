@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828085455) do
+ActiveRecord::Schema.define(:version => 20120904113842) do
 
   create_table "activo_tags", :force => true do |t|
     t.datetime "created_at"
@@ -71,6 +71,19 @@ ActiveRecord::Schema.define(:version => 20120828085455) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "persistence_token", :default => "t", :null => false
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "vlans", :force => true do |t|

@@ -75,23 +75,4 @@ class NetworksController < ApplicationController
     redirect_to "#{network_path(ip.network.id)}##{ip.ip}"
   end
 
-  def print_url
-    network = Network.find(params[:id])
-
-    pdf = Prawn::Document.new do
-
-
-      if data.length == 0
-        text "Esta red no tiene IP's asignadas"
-      else
-        table data,
-          :headers => ["IP","Hostname","Descripción"]
-      end
-
-    end
-
-
-
-    send_data pdf.render, :filename => 'listado.pdf', :type => 'application/pdf'
-  end
 end

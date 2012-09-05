@@ -1,4 +1,4 @@
-<% title "Activos gestionados" %>
+<% title "Activos gestionados (#{Activo.count})" %>
 <%= will_paginate @activos %>
 <% content_for :actions do %>
   <% render_navigation :items => activos_actions, :renderer => :links %>

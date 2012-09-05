@@ -20,7 +20,13 @@ module ActivosHelper
         :url => activo_path,
         :options => { :if => Proc.new { logged_in? },
                       :method => :delete,
-                      :confirm => "¿ Estás seguro de borrar el activo ?" }}
+                      :confirm => "¿ Estás seguro de borrar el activo ?" }},
+      { :key => :print, :name => name_for_button("print"),
+        :url => url_for("#{activo_path}.pdf"),
+        :options => {
+          :class => 'btn',
+          :title => 'Imprimir activo'
+        }}
     ]
   end
 

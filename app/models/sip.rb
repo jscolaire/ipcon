@@ -4,10 +4,16 @@ class Sip < ActiveRecord::Base
   belongs_to :network
   belongs_to :activo
 
-  #before_create :setip
+  before_save :setassigned
 
-  def setip
-    self.ip = IP.new(self.ip)
+  def setassigned
+    if !self.hostname.blank? or
+        self.gw or self.temporal or self.reserved or
+        self.activo_id != nil or self.hpsrp or
+        !self.label.blank?
+
+      self.assigned = true
+    end
   end
 
   def to_s

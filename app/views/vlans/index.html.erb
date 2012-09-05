@@ -1,4 +1,4 @@
-<% title "Vlans gestionadas" %>
+<% title "Vlans gestionadas (#{Vlan.count})" %>
 <%= will_paginate @vlans %>
 <% content_for :actions do %>
   <% render_navigation :items => vlans_actions, :renderer => :links %>
