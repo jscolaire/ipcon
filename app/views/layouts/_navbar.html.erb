@@ -1,4 +1,6 @@
 <%= link_to(h(APP_CONFIG[:brand]),:root,:class => 'brand') %>
 <%= render_navigation :level => 1 %>
 <%= render_navigation(:items => @login_items) %>
-
+<%= form_tag("/search", { :class => 'navbar-search pull-right' }) do %>
+  <%= text_field_tag :query, nil, :placeholder => 'Buscar', :class => 'search-query' %>
+<% end %>

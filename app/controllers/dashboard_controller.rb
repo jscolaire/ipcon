@@ -1,8 +1,8 @@
 class DashboardController < ApplicationController
+  before_filter :store_target_location
   layout 'application'
   $log = Log4r::Logger.new("dashboard")
   $log.add(LOGFILE)
-  before_filter :remove_location
   def index
     $log.info("Entering dashboard")
     @networks = Network.count

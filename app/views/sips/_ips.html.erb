@@ -16,7 +16,7 @@
     %>
     <tr class="<%= cl %>" id="<%= ip.ip %>">
   <td class="txtR">
-    <%= link_to(h("#{ip}/#{ip.network.bits}"),
+    <%= link_to(h(ip),
         edit_sip_path(ip),
         :name => ip.ip,
         :title => ip.network.human) %></td>

@@ -6,6 +6,8 @@ TemplateNew::Application.routes.draw do
   match 'login' => 'sessions#new', :as => :login
   match 'update' => 'sessions#update', :as => :update
 
+  match 'search' => 'search#index', :as => :search
+
   match 'switch_status' => 'networks#switch_status', :as => :switch_status
 
   resources :sessions

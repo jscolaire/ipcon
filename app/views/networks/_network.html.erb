@@ -1,0 +1,10 @@
+<%= simple_form_for @network, :html => { :class => 'form-horizontal well' } do |f| %>
+  <%= f.input :prefix, :label => "Dirección de red",
+      :hint => "Puedes usar formato CIDR o decimal" %>
+  <%= f.input :name, :label => "Nombre de red" %>
+  <%= f.input :vlan_id, :collection => Vlan.order('tag'),
+      :label_method => :to_s , :value_method => :id %>
+  <%= f.submit "Actualizar red", :class => 'btn btn-primary' %>
+  <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
+<% end %>
+

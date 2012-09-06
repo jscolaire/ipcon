@@ -1,7 +1,7 @@
 class NetworksController < ApplicationController
 
   before_filter :login_required, :except => [ :index, :show ]
-  before_filter :remove_location, :only => [ :index,:show ]
+  before_filter :store_target_location, :except => [ :edit ]
   $log = Log4r::Logger.new("network")
   $log.add(LOGFILE)
 
@@ -45,14 +45,23 @@ class NetworksController < ApplicationController
     respond_to do |format|
       if @network.save
         $log.info("Network #{@network} was successfully created.")
-        flash[:notice] = 'Network was successfully created.'
+        flash[:info] = 'La red ha sido creada correctamente.'
         format.html { redirect_to(@network) }
       else
         $log.error("Network wasn't successfully created.")
-        flash[:error] = "Network wasn't successfully created."
+        flash[:error] = "La red no ha podido ser creada."
         format.html { render :action => "new", :layout => 'application' }
       end
     end
+  end
+
+  def update
+    @network = Network.find(params[:id])
+      if @network.update_attributes(params[:network])
+        flash[:info] = 'La red ha sido actualizada correctamente'
+        redirect_to session[:return_to]
+      else
+      end
   end
 
   def destroy

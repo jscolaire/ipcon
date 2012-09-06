@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   $log = Log4r::Logger.new("appctrl")
   $log.add(LOGFILE)
 
-  private
+  #private
 
   def remove_location
     session[:return_to] = nil
@@ -33,6 +33,12 @@ class ApplicationController < ActionController::Base
       ]
     end
 
+  end
+
+  def search
+    return if params[:query].to_s.blank?
+    render :text => "Tu buscabas #{params[:query]}, ehhh canalla....",
+      :layout => 'application'
   end
 
 end
