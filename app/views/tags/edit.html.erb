@@ -1,10 +1,9 @@
 <% title "Modificación de etiqueta" %>
-<%= session[:return_to] %>
 
 <%= simple_form_for(@tag,:html => { :class => 'well form-horizontal' }) do |f| %>
 <%= f.input :tag %>
 <%= f.input :description %>
-<%= f.button :submit, :class => "btn btn-primary" %>
+<%= f.submit "Actualizar", :class => "btn btn-primary" %>
 <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
 <% end %>
 

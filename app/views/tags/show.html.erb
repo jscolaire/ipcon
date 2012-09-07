@@ -1,4 +1,5 @@
 <% title @tag.tag %>
+<h2><%= @tag.description %></h2>
 <% content_for :actions do %>
   <% render_navigation :items => tag_actions, :renderer => :links %>
 <% end %>

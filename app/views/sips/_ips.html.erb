@@ -43,7 +43,8 @@
     <td class="actions">
       <%= link_to(
                     content_tag(:i,"",:class => icon,:title => title),
-        :action => 'switch_status',
+                    :action => 'switch_status',
+                    :controller => 'networks',
         :id => ip.id) -%>
     </td>
   <% end %>

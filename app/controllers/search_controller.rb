@@ -20,8 +20,10 @@ class SearchController < ApplicationController
     )
 
     if @activos.length == 0 and @ips.length == 0
-      render :text => "<p>No hay resultados coincidentes con los parámetros de búsqueda</p>",
-        :layout => 'application'
+      flash[:info] = "No hay resultados coincidentes con los parámetros de búsqueda"
+      redirect_to(session[:return_to])
+      #render :text => "<p>No hay resultados coincidentes con los parámetros de búsqueda</p>",
+        #:layout => 'application'
     end
 
   end

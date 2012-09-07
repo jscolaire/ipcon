@@ -44,7 +44,7 @@ class TagsController < ApplicationController
   def update
     @tag = Tag.find(params[:id])
     if @tag.update_attributes(params[:tag])
-      flash[:notice] = "La etiqueta ha sido modificada correctamente"
+      flash[:success] = "La etiqueta ha sido modificada correctamente"
       redirect_to(session[:return_to])
     else
       render :action => 'edit'
