@@ -32,10 +32,10 @@ class Activo < ActiveRecord::Base
 
   def update_tags(tags)
     # borramos todas las asociaciones
+    $log.info "Updating tags"
     ActivoTag.delete_all("activo_id = #{id}")
     tags.strip.sub(/,$/,'')
     tags.split(",").each {|tag|
-      puts "TAG: #{tag.strip}"
       t = Tag.find_or_create_by_tag(tag.strip)
       ActivoTag.new(:activo_id => id,:tag_id => t.id).save
     }

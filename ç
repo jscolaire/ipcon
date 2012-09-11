@@ -69,14 +69,17 @@ class ActivosController < ApplicationController
   def update
     @activo = Activo.find(params[:id])
     $log.info("Trying update #{@activo}")
-    @activo.update_tags(params[:activo][:raw_tags_list]) if params[:activo][:raw_tags_list] != nil
-    params[:activo].delete :raw_tags_list
+    $log.debug params
+    @activo.update_tags(params[:raw_tags_list]) if params[:raw_tags_list] != nil
+    params[:activo].delete :raw_tags_list]
     respond_to do |format|
       if @activo.update_attributes(params[:activo])
-        flash[:success] = 'Activo modificado correctamente.'
+        flash[:notice] = 'Activo was successfully updated.'
         format.html { redirect_to(session[:return_to]) }
+        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
+        format.xml  { render :xml => @activo.errors, :status => :unprocessable_entity }
       end
     end
   end

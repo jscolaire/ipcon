@@ -1,0 +1,10 @@
+<% title "Edición de activo" %>
+
+<%= simple_form_for(@activo, :html => { :class => 'well form-horizontal' }) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :raw_tags_list %>
+  <%= f.submit "Actualizar", :class => 'btn btn-primary' %>
+  <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
+<% end %>
+

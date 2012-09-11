@@ -1,7 +1,7 @@
 class NetworksController < ApplicationController
 
   before_filter :login_required, :except => [ :index, :show ]
-  before_filter :store_target_location, :except => [ :edit ]
+  before_filter :store_target_location, :except => [ :edit,:update ]
   $log = Log4r::Logger.new("network")
   $log.add(LOGFILE)
 
