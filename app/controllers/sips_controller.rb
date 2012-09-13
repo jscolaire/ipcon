@@ -33,7 +33,7 @@ class SipsController < ApplicationController
       params[:sip][:gw_id] = nil
     end
     if @ip.update_attributes(params[:sip])
-      flash[:sucess] = 'La IP ha sido actualizada correctamente.'
+      flash[:success] = 'La IP ha sido actualizada correctamente.'
       rt = session[:return_to]
       rt = "#{network_path(@ip.network.id)}##{@ip.ip}" if rt == nil
       redirect_to(rt)
