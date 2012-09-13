@@ -23,6 +23,7 @@ class Sip < ActiveRecord::Base
   end
 
   def free
+    self.gw_id = nil
     self.hostname = nil
     self.gw = false
     self.temporal = false
