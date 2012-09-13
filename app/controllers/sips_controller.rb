@@ -22,10 +22,18 @@ class SipsController < ApplicationController
       $log.debug "activo is #{params[:sip][:activo]}"
       @ip.activo = Activo.find_or_create_by_name(params[:sip][:activo])
     end
-      params[:sip].delete :activo
+    params[:sip].delete :activo
+
+    #si hemos marcado como gateway ponemos el número de red
+    if params[:sip][:gw_id].to_i == 1
+      $log.info "Setting gateway for #{@ip.network}"
+      params[:sip][:gw_id] = @ip.network.id
+    else
+      $log.info "Removing gateway for #{@ip.network}"
+      params[:sip][:gw_id] = nil
+    end
     if @ip.update_attributes(params[:sip])
-      #@ip.save!
-      flash[:notice] = 'La IP ha sido actualizada correctamente.'
+      flash[:sucess] = 'La IP ha sido actualizada correctamente.'
       rt = session[:return_to]
       rt = "#{network_path(@ip.network.id)}##{@ip.ip}" if rt == nil
       redirect_to(rt)

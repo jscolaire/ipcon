@@ -2,12 +2,19 @@
 
 <%= simple_form_for(@ip, :html => { :class => 'well form-horizontal' }) do |f|  %>
   <%= f.input :hostname %>
-  <%= f.input :label %>
-  <%= f.input :activo %>
-  <%= f.input :gw, :as => :boolean %>
-  <%= f.input :hpsrp, :as => :boolean %>
-  <%= f.input :temporal, :as => :boolean %>
-  <%= f.submit 'Actualizar IP', :class=> "btn btn-primary" %>
-  <%= link_to "Cancelar", "#{network_path(@ip.network_id)}##{@ip.ip}", :class => "btn btn-success" %>
-<% end %>
+  <%= f.input :label, :label => 'Descripción' %>
+  <% if @ip.network.gateway == nil %>
+    <%= f.input :gw_id, :label => 'Gateway', :as => :boolean,
+      :if => Proc.new { @ip.network.gateway == nil } %>
+    <% else if @ip.gw_id != nil %>
+      <%= f.input :gw_id, :label => 'Gateway', :as => :boolean %>
+    <% end %>
+  <% end %>
+    <%= f.input :activo %>
+    <%= f.input :gw, :label => "Ruta alternativa", :as => :boolean %>
+    <%= f.input :hpsrp, :label => 'HPSRP', :as => :boolean %>
+    <%= f.input :temporal, :as => :boolean %>
+    <%= f.submit 'Actualizar IP', :class=> "btn btn-primary" %>
+    <%= link_to "Cancelar", "#{network_path(@ip.network_id)}##{@ip.ip}", :class => "btn btn-success" %>
+  <% end %>
 

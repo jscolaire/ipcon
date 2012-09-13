@@ -76,12 +76,19 @@ class NetworksController < ApplicationController
 
   def switch_status
     ip = Sip.find(params[:id])
+    $log.debug("Switching status for #{ip}")
+    if !ip.assigned
+      ip.assigned = true
+    else
     ip.free
-    ip.save
+    end
+    ip.save!
+    $log.debug "Rendering now"
     #ip.assigned = !ip.assigned
     #ip.save
     #redirect_to "/networks/#{ip.network.id}##{ip.ip}"
-    redirect_to "#{network_path(ip.network.id)}##{ip.ip}"
+    redirect_to "#{network_path(ip.network.id)}##{ip.id}"
+    #render
   end
 
 end

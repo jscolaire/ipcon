@@ -7,10 +7,12 @@ class Sip < ActiveRecord::Base
   before_save :setassigned
 
   def setassigned
+    self.assigned = false
     if !self.hostname.blank? or
         self.gw or self.temporal or self.reserved or
         self.activo_id != nil or self.hpsrp or
-        !self.label.blank?
+        !self.label.blank? or
+        self.gw_id != nil
 
       self.assigned = true
     end
