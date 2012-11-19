@@ -12,7 +12,20 @@
   <tbody>
     <% for vlan in @vlans %>
       <tr>
-        <td style="text-align: right;"><%= vlan.tag %></td>
+        <td style="text-align: right;">
+          <%= vlan.tag %>
+          <% if logged_in? %>
+          <%= link_to(
+            content_tag(:i,"",:class => "icon-edit"),
+            edit_vlan_path(vlan),
+            :title => "Editar") -%>
+          <%= link_to(
+            content_tag(:i,"",:class => "icon-trash"),
+            vlan,:confirm => "¿Está seguro de borrar la vlan?",
+            :method => :delete,
+            :title => "Borrar") -%>
+        <% end %>
+        </td>
         <td><%= vlan.name %></td>
         <td>
           <% vlan.networks.each do |net| %>
