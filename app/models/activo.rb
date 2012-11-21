@@ -41,4 +41,17 @@ class Activo < ActiveRecord::Base
     }
   end
 
+  def match(tags)
+    if tags.class != Array
+      $log.error "Passed parametes is not array"
+      $log.info "Forcing to true matching Activo"
+      return true
+    end
+    match = "(.*)"
+    tags.sort.each {|t|
+      match << t << "(.*)"
+    }
+    self.raw_tags_list.match(match)
+  end
+
 end

@@ -1,13 +1,13 @@
 <% title "Resultados de búsqueda (#{params[:query]})" %>
 
-<% if @activos.length > 0 %>
+<% if @activos != nil and @activos.length > 0 %>
   <div class="well">
     <h2>Listado de activos</h2>
     <%= render :partial => 'activos/activos' %>
   </div>
 <% end %>
 
-<% if @ips.length > 0 %>
+<% if @ips != nil and @ips.length > 0 %>
   <div class="well">
     <h2>Listado de IP's</h2>
     <%= render :partial => 'sips/ips' %>
