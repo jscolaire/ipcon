@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang=es>
   <head>
-    <link rel="shorcut icon" href="ipcon.ico">
     <title><%= content_for?(:title) ? APP_CONFIG[:brand] + " - " + yield(:title) : APP_CONFIG[:brand] %></title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>

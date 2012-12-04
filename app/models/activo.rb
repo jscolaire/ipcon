@@ -47,11 +47,27 @@ class Activo < ActiveRecord::Base
       $log.info "Forcing to true matching Activo"
       return true
     end
+    negative_tags = Array.new
     match = "(.*)"
+    nomatch = "(.*)"
     tags.sort.each {|t|
-      match << t << "(.*)"
+      if t.chars.first == "!"
+        nomatch << t.sub(/^!/,"") << "(.*)"
+        negative_tags.push t.sub(/^!/,"")
+      else
+        match << t << "(.*)"
+      end
     }
-    self.raw_tags_list.match(match)
+    if negative_tags.count > 0
+      # any match excludes activo
+      negative_tags.each { |nt|
+        return false if self.raw_tags_list.match(/(.*)#{nt}(.*)/)
+      }
+      # now must match with positives matches
+      self.raw_tags_list.match(match)
+    else
+      self.raw_tags_list.match(match)
+    end
   end
 
 end

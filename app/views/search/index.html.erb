@@ -1,4 +1,7 @@
-<% title "Resultados de búsqueda (#{params[:query]})" %>
+<% title "#{@activos.count} resultados coincidentes con la búsqueda (#{params[:query]})" %>
+<% content_for :actions do %>
+  <% render_navigation :items => search_actions, :renderer => :links %>
+<% end %>
 
 <% if @activos != nil and @activos.length > 0 %>
   <div class="well">

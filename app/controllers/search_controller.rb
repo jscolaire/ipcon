@@ -21,8 +21,11 @@ class SearchController < ApplicationController
     }
 
     if tag
-      query = ""
+      query= ""
       tags.sort.each {|t|
+        if t.split("!").length == 2
+          next
+        end
         query << "tag = '" << t << "' or "
       }
       query = query.sub(/ or $/,"")
@@ -33,17 +36,21 @@ class SearchController < ApplicationController
         @activos.push c if c.match(tags.sort)
       }
       $log.info "There are #{@activos.length} actives"
+      File.open("tmp/ipcon_activos_searched", "w") { |file|
+        # grabamos título y activos
+        Marshal.dump(["Listado de activos coincidentes con #{params[:query]}",@activos],file)
+      }
     else
-    query = "%" + params[:query] + "%"
-    @activos = Activo.where(
-      "name like ? or description like ?",
-      query,query
-    )
+      query = "%" + params[:query] + "%"
+      @activos = Activo.where(
+        "name like ? or description like ?",
+        query,query
+      )
 
-    @ips = Sip.where(
-      "ip like ? or hostname like ? or label like ?",
-      query,query,query
-    )
+      @ips = Sip.where(
+        "ip like ? or hostname like ? or label like ?",
+        query,query,query
+      )
 
     end
 
@@ -51,8 +58,18 @@ class SearchController < ApplicationController
       flash[:info] = "No hay resultados coincidentes con los parámetros de búsqueda"
       redirect_to(session[:return_to])
       #render :text => "<p>No hay resultados coincidentes con los parámetros de búsqueda</p>",
-        #:layout => 'application'
+      #:layout => 'application'
     end
 
+  end
+
+  def print
+    File.open("tmp/ipcon_activos_searched", "r") { |file|
+      ary = Marshal.load(file)
+  puts ary
+      @title = ary[0]
+      @activos = ary[1]
+    }
+    render :template => "activos/index.pdf", :layout => false
   end
 end

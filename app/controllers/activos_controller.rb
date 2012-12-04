@@ -8,10 +8,11 @@ class ActivosController < ApplicationController
   def index
     #@activos = Activo.all(:order => 'name')
     @activos = Activo.paginate(:page => params[:page])
+    $log.debug "Activos is #{@activos.class}"
 
     respond_to do |format|
       format.html # index.html.erb
-      format.pdf { render :layout => false }
+      format.pdf { render :pdf =>  @activos = Activo.order("name"), :layout => false  }
       #format.xml  { render :xml => @activos }
     end
   end
