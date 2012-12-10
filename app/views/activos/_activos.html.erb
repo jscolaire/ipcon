@@ -11,9 +11,18 @@
     <% for activo in @activos %>
       <tr>
         <td>
-          <%= link_to(h(activo.name),activo) %>
           <% if logged_in? %>
+          <%= link_to(
+            content_tag(:i,"",:class => "icon-edit"),
+            edit_activo_path(activo),
+            :title => "Editar") -%>
+          <%= link_to(
+            content_tag(:i,"",:class => "icon-trash"),
+            activo,:confirm => "¿Está seguro de borrar el activo?",
+            :method => :delete,
+            :title => "Borrar") -%>
           <% end %>
+          <%= link_to(h(activo.name),activo) %>
         </td>
 
         <td><%= activo.description %></td>
