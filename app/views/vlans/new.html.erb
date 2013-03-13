@@ -1,0 +1,7 @@
+<% title "Alta de vlan" %>
+<%= simple_form_for @vlan, :html => { :class => 'form-horizontal well' } do |f| %>
+  <%= f.input :tag, :label => "Tag" %>
+  <%= f.input :name, :label => "Nombre de la vlan" %>
+  <%= f.submit "Actualizar vlan", :class => 'btn btn-primary' %>
+  <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
+<% end %>
