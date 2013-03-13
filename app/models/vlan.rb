@@ -3,6 +3,7 @@ class Vlan < ActiveRecord::Base
 
   validates_presence_of :tag
   validates_numericality_of :tag
+  validates_presence_of :name
 
   def to_s
     tag.to_s + " - " + name
