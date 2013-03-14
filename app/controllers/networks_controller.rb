@@ -7,7 +7,7 @@ class NetworksController < ApplicationController
 
   def index
     $log.info("Requested list networks")
-    @networks = Network.order("prefix")
+    @networks = Network.paginate(:order => "prefix", :page => params[:page])
     respond_to do |format|
       format.html
       format.pdf { render :layout => false }
@@ -90,5 +90,22 @@ class NetworksController < ApplicationController
     redirect_to "#{network_path(ip.network.id)}##{ip.id}"
     #render
   end
+
+  def resolv
+    #TODO: deberíamos evitar el consultar mediante un comando y hacerlo con ruby,
+    #ahora es necesario instalar el paquete bind9-hosts
+    network = Network.find(params[:id])
+    network.sips.each {|ip|
+      cmd = "host #{ip}| grep -i name | awk -F: '{ print $2 }'"
+      #hostname = `host #{ip.ip} | grep -i name | awk -F: '{ print $2 }'`.strip
+      hostname = %x[ host #{ip} ].strip
+      if ! hostname.match("not found")
+        ip.hostname = hostname.split.last.sub(/.$/,'')
+        ip.save
+      end
+    }
+    redirect_to network
+  end
+
 
 end

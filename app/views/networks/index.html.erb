@@ -1,4 +1,5 @@
 <% title "Redes gestionadas (#{Network.count})" %>
+<%= will_paginate @networks %>
 <% content_for :actions do %>
   <% render_navigation :items => networks_actions, :renderer => :links %>
 <% end %>

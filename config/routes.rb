@@ -10,6 +10,7 @@ TemplateNew::Application.routes.draw do
   match 'search_print' => 'search#print', :as => :search_print
 
   match 'switch_status' => 'networks#switch_status', :as => :switch_status
+  match 'resolv' => 'networks#resolv', :as => :resolv
 
   resources :sessions
 
