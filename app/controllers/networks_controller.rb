@@ -101,6 +101,7 @@ class NetworksController < ApplicationController
       hostname = %x[ host #{ip} ].strip
       if ! hostname.match("not found")
         ip.hostname = hostname.split.last.sub(/.$/,'')
+        ip.activo = Activo.find_or_create_by_name(ip.hostname.split(".")[0]) if ip.activo == nil
         ip.save
       end
     }
