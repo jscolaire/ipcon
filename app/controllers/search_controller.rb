@@ -59,7 +59,7 @@ class SearchController < ApplicationController
     end
 
     #if (@activos == nil and @ips == nil) or (@activos.length == 0 or ( @ips != nil and @ips.length == 0))
-    if (@activos == nil and @ips == nil)
+    if (@activos.count == 0 and @ips.count == 0)
       flash[:info] = "No hay resultados coincidentes con los parámetros de búsqueda"
       redirect_to(session[:return_to])
       #render :text => "<p>No hay resultados coincidentes con los parámetros de búsqueda</p>",
