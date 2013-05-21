@@ -1,4 +1,4 @@
-<% title "#{@activos.count} resultados coincidentes con la búsqueda (#{params[:query]})" %>
+<% title "#{@activos.count + @ips.count} resultados coincidentes con la búsqueda (#{params[:query]})" %>
 <% content_for :actions do %>
   <% render_navigation :items => search_actions, :renderer => :links %>
 <% end %>

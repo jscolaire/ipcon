@@ -17,6 +17,10 @@
   %>
 <tr class="<%= cl %>" id="<%= ip.id %>">
   <td class="txtR">
+    <% if controller.controller_name != "networks" %>
+      <%= link_to('',ip.network,:class=> "icon-th-list",
+                  :title => "#{ip.network.name}") %>
+    <% end %>
     <%= link_to(h(ip),
                 edit_sip_path(ip),
                 :name => ip.ip,

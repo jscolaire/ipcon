@@ -29,7 +29,7 @@
         <td><%= vlan.name %></td>
         <td>
           <% vlan.networks.each do |net| %>
-            <%= link_to(h("#{net} - #{net.name}"), network_path(net))  %>
+            <%= link_to(h("#{net} - #{net.name}"), network_path(net))  %><br/>
           <% end %>
         </td>
       </tr>

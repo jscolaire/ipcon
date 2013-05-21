@@ -41,20 +41,25 @@ class SearchController < ApplicationController
         Marshal.dump(["Listado de activos coincidentes con #{params[:query]}",@activos],file)
       }
     else
+      $log.info "Query do not content tags"
       query = "%" + params[:query] + "%"
+      $log.debug "Query translated is #{query}"
       @activos = Activo.where(
         "name like ? or description like ?",
         query,query
       )
+      $log.debug "there are #{@activos.length} activos"
 
       @ips = Sip.where(
         "ip like ? or hostname like ? or label like ?",
         query,query,query
       )
+      $log.debug "there are #{@ips.length} ips"
 
     end
 
-    if (@activos == nil and @ips == nil) or (@activos.length == 0 or ( @ips != nil and @ips.length == 0))
+    #if (@activos == nil and @ips == nil) or (@activos.length == 0 or ( @ips != nil and @ips.length == 0))
+    if (@activos == nil and @ips == nil)
       flash[:info] = "No hay resultados coincidentes con los parámetros de búsqueda"
       redirect_to(session[:return_to])
       #render :text => "<p>No hay resultados coincidentes con los parámetros de búsqueda</p>",
