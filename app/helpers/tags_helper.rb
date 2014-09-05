@@ -21,9 +21,11 @@ module TagsHelper
                     :class => 'btn',
                     :title => "Editar etiqueta" } },
       { :key => :delete, :name => name_for_button("trash"),
-      :url => url_for(:action => 'delete'),
+      :url => tag_path,
       :options => { :if => Proc.new { logged_in? },
-                    :class => 'btn',
+                    :method => :delete,
+                    :class => 'btn', :title => "Delete",
+                    :confirm => "¿ Está seguro de borrar la etiqueta ?",
                     :title => 'Borrar la etiqueta seleccionada' } }
     ]
   end

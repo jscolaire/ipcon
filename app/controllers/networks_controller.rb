@@ -22,6 +22,22 @@ class NetworksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf { render :layout => false }
+      format.xls {
+        wb = Spreadsheet::Workbook.new
+        ws = wb.create_worksheet :name => "#{@network}"
+        ws.row(0).concat %w{IP Activo Hostname Descripción}
+        ws.row(0).default_format = Spreadsheet::Format.new :color => :green, :weight => :bold
+        @ips.each_with_index {|ip,i|
+          if ip.activo == nil
+            ws.row(i+1).push ip.ip,ip.activo,ip.hostname,ip.label
+          else
+            ws.row(i+1).push ip.ip,ip.activo.name,ip.hostname,ip.label
+          end
+        }
+        xls = StringIO.new("")
+        wb.write xls
+        send_data xls.string, :type => :xls, :filename => "#{@network.id}.xls"
+      }
     end
   end
 

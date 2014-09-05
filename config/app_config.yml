@@ -13,3 +13,6 @@ test:
 
 production:
   domain: example.com
+  brand: ipcon
+  codename: ipcon
+  log: log/ipcon.log

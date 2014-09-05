@@ -43,7 +43,11 @@ module NetworksHelper
       { :key => :print, :name => name_for_button('print'),
         :url => url_for("#{network_path}.pdf"),
         :options => { :class => 'btn',
-                      :title => "Print" } }
+                      :title => "Print" } },
+      { :key => :export, :name => name_for_button('arrow-down'),
+        :url => url_for("#{network_path}.xls"),
+        :options => { :class => 'btn',
+                      :title => 'Export'} }
     ]
   end
 end
