@@ -1,3 +1,4 @@
+#encoding : utf-8
 class Network < ActiveRecord::Base
   $log = Log4r::Logger.new("network model")
   $log.add(LOGFILE)

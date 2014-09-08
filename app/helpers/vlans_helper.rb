@@ -1,3 +1,4 @@
+#encoding : utf-8
 module VlansHelper
   def vlans_actions
     [

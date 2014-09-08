@@ -1,3 +1,4 @@
+#encoding : utf-8
 class SipsController < ApplicationController
   before_filter :login_required
   $log = Log4r::Logger.new("ip")

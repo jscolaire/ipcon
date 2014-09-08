@@ -1,3 +1,4 @@
+#encoding : utf-8
 class Sip < ActiveRecord::Base
   set_table_name "ips"
 

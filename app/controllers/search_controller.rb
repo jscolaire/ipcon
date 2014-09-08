@@ -1,3 +1,4 @@
+#encoding : utf-8
 class SearchController < ApplicationController
   $log = Log4r::Logger.new("search")
   $log.add(LOGFILE)

@@ -1,3 +1,4 @@
+#encoding : utf-8
 class SessionsController < ApplicationController
 
   $log = Log4r::Logger.new("sessions")

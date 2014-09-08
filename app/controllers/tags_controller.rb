@@ -1,3 +1,4 @@
+#encoding : utf-8
 class TagsController < ApplicationController
 
   before_filter :login_required, :except => [ :index, :show ]

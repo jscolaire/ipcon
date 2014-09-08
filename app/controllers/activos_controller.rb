@@ -1,3 +1,4 @@
+#encoding : utf-8
 class ActivosController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
   before_filter :store_target_location, :except => [:edit, :update]

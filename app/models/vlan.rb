@@ -1,3 +1,4 @@
+#encoding : utf-8
 class Vlan < ActiveRecord::Base
   has_many :networks, :dependent => :nullify
 
