@@ -1,4 +1,3 @@
-#encoding : utf-8
 module NetworksHelper
   def networks_actions
     [

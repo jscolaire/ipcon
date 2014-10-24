@@ -1,4 +1,3 @@
-#encoding : utf-8
 class VlansController < ApplicationController
   $log = Log4r::Logger.new("vlans")
   $log.add(LOGFILE)

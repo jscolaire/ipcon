@@ -1,4 +1,3 @@
-#encoding : utf-8
 class Network < ActiveRecord::Base
   $log = Log4r::Logger.new("network model")
   $log.add(LOGFILE)
@@ -110,6 +109,6 @@ class Network < ActiveRecord::Base
 
   def human
     net = NetAddr::CIDR.create(prefix)
-    "#{net.network}/#{net.wildcard_mask}"
+    "#{net.network}/#{net.wildcard_mask}#{net.netmask}"
   end
 end

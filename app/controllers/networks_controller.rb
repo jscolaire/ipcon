@@ -1,4 +1,3 @@
-#encoding : utf-8
 class NetworksController < ApplicationController
 
   before_filter :login_required, :except => [ :index, :show ]

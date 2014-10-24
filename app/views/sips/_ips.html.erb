@@ -19,7 +19,7 @@
   <td class="txtR">
     <% if controller.controller_name != "networks" %>
       <%= link_to('',ip.network,:class=> "icon-th-list",
-                  :title => "#{ip.network.name}") %>
+                  :title => "#{ip.network.name} (vlan #{ip.network.vlan.tag})") %>
     <% end %>
     <%= link_to(h(ip),
                 edit_sip_path(ip),

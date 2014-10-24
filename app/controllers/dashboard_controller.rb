@@ -1,4 +1,3 @@
-#encoding : utf-8
 class DashboardController < ApplicationController
   before_filter :store_target_location
   layout 'application'

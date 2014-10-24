@@ -1,4 +1,3 @@
-#encoding : utf-8
 module ApplicationHelper
   def title(page_title, show_title = true)
     page_title = "Undefined" if page_title == nil

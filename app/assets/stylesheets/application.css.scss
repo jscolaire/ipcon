@@ -11,3 +11,89 @@
  *= require_self
  *= require_tree .
 */
+$iconSpritePath: asset-url('glyphicons-halflings.png', image);
+$iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+.nav li a.selected { color: $linkColor; }
+/*body { padding-top: 60px; }*/
+
+/*sticky footer*/
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 60px;
+}
+#footer {
+  background-color: #f5f5f5;
+  .container p {
+    /*padding: 20px;*/
+    text-align: center;
+    margin: 20px 0;
+  }
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+td.gw,td.route,td.hsrp,td.temporal,td.assigned {
+  width: 50px;
+  padding: 5px;
+  margin: 2px;
+}
+td.gw,tr.gw { background: lighten($green,5%) }
+td.route,tr.route { background: lighten($green,25%) }
+td.hsrp,tr.hsrp { background: lighten($green,45%) }
+td.temporal,tr.temporal { background: lighten($yellow,35%) }
+
+td.assigned,tr.assigned { background: lighten($blue,45%) }
+
+
+//.xxs .xs .s .l .xl .xxl
+
+.tags-cloud {
+  a.xxs { font-size: 0.60em }
+  a.xs { font-size: 1em }
+  a.s { font-size: 1.75em }
+  a.l { font-size: 2.25em }
+  a.xl { font-size: 3em }
+  a.xxl { font-size: 3.75em }
+  text-align: center;
+  line-height: 2.5em;
+  h2 { text-align: left; }
+}
+
+.tags-cloud-mini {
+  a.xxs { font-size: 0.60em }
+  a.xs { font-size: 0.75em }
+  a.s { font-size: 1em }
+  a.l { font-size: 1.50em }
+  a.xl { font-size: 2em }
+  a.xxl { font-size: 2.50em }
+  text-align: center;
+  line-height: 2.5em;
+  h2 { text-align: left; }
+}
