@@ -111,4 +111,9 @@ class Network < ActiveRecord::Base
     net = NetAddr::CIDR.create(prefix)
     "#{net.network}/#{net.wildcard_mask}#{net.netmask}"
   end
+
+  def title
+    return self.name if self.vlan == nil
+    "#{self.name} (vlan #{self.vlan.tag})"
+  end
 end
