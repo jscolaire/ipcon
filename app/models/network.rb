@@ -109,7 +109,8 @@ class Network < ActiveRecord::Base
 
   def human
     net = NetAddr::CIDR.create(prefix)
-    "#{net.network}/#{net.wildcard_mask}#{net.netmask}"
+    "#{net.network}/#{net.wildcard_mask}#{net.netmask}" if self.gateway == nil
+    "#{net.network}/#{net.wildcard_mask}#{net.netmask} gw: #{self.gateway}"
   end
 
   def title
