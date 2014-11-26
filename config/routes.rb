@@ -1,24 +1,29 @@
 TemplateNew::Application.routes.draw do
-  match 'dashboard' => 'dashboard#index', :as => :dashboard
-
-  match 'user/edit' => 'sessions#edit', :as => :edit_current_user
-  match 'logout' => 'sessions#destroy', :as => :logout
-  match 'login' => 'sessions#new', :as => :login
-  match 'update' => 'sessions#update', :as => :update
-
-  match 'search' => 'search#index', :as => :search
-  match 'search_print' => 'search#print', :as => :search_print
-
-  match 'switch_status' => 'networks#switch_status', :as => :switch_status
-  match 'resolv' => 'networks#resolv', :as => :resolv
 
   resources :sessions
-
   resources :networks
   resources :vlans
   resources :activos
   resources :sips
   resources :tags
+
+  match 'dashboard' => 'dashboard#index', :as => :dashboard
+  match 'user/edit' => 'sessions#edit', :as => :edit_current_user
+  match 'logout' => 'sessions#destroy', :as => :logout
+  match 'login' => 'sessions#new', :as => :login
+  match 'update' => 'sessions#update', :as => :update
+  match 'search' => 'search#index', :as => :search
+  match 'search_print' => 'search#print', :as => :search_print
+  match 'switch_status' => 'networks#switch_status', :as => :switch_status
+  match 'resolv' => 'networks#resolv', :as => :resolv
+  post 'taxonomy' => 'taxonomy#create', :as => :taxontype
+  match 'taxonomy' => 'taxonomy#index', :as => :taxonomy
+  match 'taxonomy/new' => 'taxonomy#new'
+  match 'taxonomy/show/:id' => 'taxonomy#show#id'
+	match 'taxonomy/delete/:id' => 'taxonomy#delete#id'
+	match 'taxonomy/edit/:id' => 'taxonomy#edit#id'
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
