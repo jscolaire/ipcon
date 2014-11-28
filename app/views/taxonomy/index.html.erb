@@ -5,17 +5,17 @@
 
 <% if @types.length == 0 %>
   <p>No hay tipos de taxonomía definidos</p>
-  <% else %>
-<ul class="nav nav-tabs">
-  <% @types.each do |t| %>
-    <% if t == session[:taxontype] %>
-      <li class="active">
-    <% else %>
-      <li>
-    <% end %>
-    <%= link_to t.name,"/taxonomy/show/#{t.id}" %>
-      </li>
-  <% end %>
-</ul>
+<% else %>
+  <ul class="nav nav-tabs">
+    <% @types.each do |t| %>
+      <% if t == session[:taxontype] %>
+        <li class="active">
+        <% else %>
+          <li>
+          <% end %>
+          <%= link_to t.name,"/taxonomy/show/#{t.id}" %>
+          </li>
+        <% end %>
+  </ul>
 <% end %>
 

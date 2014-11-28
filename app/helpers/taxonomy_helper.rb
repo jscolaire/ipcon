@@ -8,6 +8,13 @@ module TaxonomyHelper
                       :class => "btn",
                       :title => "Nuevo tipo" }
         },
+      { :key => :add, :name => name_for_button("plus-sign"),
+        :url => new_taxon_path,
+        :options => { :if => Proc.new { logged_in? },
+                      :container_class => 'btn-group',
+                      :class => "btn",
+                      :title => "Nuevo taxon" }
+        },
       { :key => :edit, :name => name_for_button("edit"),
         :url => "/taxonomy/edit/#{session[:taxontype].id}",
         :options => { :if => Proc.new { logged_in? },

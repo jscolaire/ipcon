@@ -6,6 +6,7 @@ class TaxonomyController < ApplicationController
     $log.debug("Entering on taxonomy controller")
     @types = Taxontype.all
     session[:taxontype] = @types.first if session[:taxontype] == nil
+    @taxons = Taxon.all
   end
 
   def new

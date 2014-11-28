@@ -1,5 +1,7 @@
 TemplateNew::Application.routes.draw do
 
+  resources :taxons
+
   resources :sessions
   resources :networks
   resources :vlans
