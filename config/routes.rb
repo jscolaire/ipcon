@@ -16,12 +16,14 @@ TemplateNew::Application.routes.draw do
   match 'search_print' => 'search#print', :as => :search_print
   match 'switch_status' => 'networks#switch_status', :as => :switch_status
   match 'resolv' => 'networks#resolv', :as => :resolv
-  post 'taxonomy' => 'taxonomy#create', :as => :taxontype
-  match 'taxonomy' => 'taxonomy#index', :as => :taxonomy
+
+	put 'taxonomy/:id' => 'taxonomy#update#id'
+  post 'taxonomy' => 'taxonomy#create', :as => :taxontypes
   match 'taxonomy/new' => 'taxonomy#new'
   match 'taxonomy/show/:id' => 'taxonomy#show#id'
 	match 'taxonomy/delete/:id' => 'taxonomy#delete#id'
 	match 'taxonomy/edit/:id' => 'taxonomy#edit#id'
+  match 'taxonomy' => 'taxonomy#index'
 
 
 

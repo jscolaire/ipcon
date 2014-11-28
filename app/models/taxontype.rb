@@ -10,4 +10,7 @@ class Taxontype < ActiveRecord::Base
     self.name = self.name.strip
   end
 
+  def to_s
+    self.name
+  end
 end

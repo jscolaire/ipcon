@@ -1,5 +1,5 @@
 class TaxonomyController < ApplicationController
-  before_filter :store_target_location, :except => [ :edit,:new ]
+  before_filter :store_target_location, :except => [ :edit,:new, :create, :update]
   $log = Log4r::Logger.new("taxonomy")
   $log.add(LOGFILE)
   def index
@@ -46,5 +46,22 @@ class TaxonomyController < ApplicationController
     Taxontype.delete(params[:id])
     session[:taxontype] = Taxontype.all.first
     redirect_to '/taxonomy'
+  end
+
+  def edit
+    $log.info("editing type of taxonomy #{params[:id]}")
+    @type = Taxontype.find(params[:id])
+  end
+
+  def update
+    $log.info("updating type of taxonomy #{session[:taxontype]}")
+    $log.debug(params)
+    $log.debug("I want to put #{params[:taxontype]} on taxonomytype")
+
+    if session[:taxontype].update_attributes(params[:taxontype])
+      $log.info("#{@type} has updated successfully")
+      flash[:info] = "El tipo de taxonomía ha sido actualizado"
+      redirect_to session[:return_to]
+    end
   end
 end
