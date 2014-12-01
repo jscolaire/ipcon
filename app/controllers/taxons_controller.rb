@@ -24,6 +24,7 @@ class TaxonsController < ApplicationController
   def new
     $log.info("requesting new taxon of #{session[:taxontype]}")
     @taxon = Taxon.new
+    @taxon.taxontype_id = session[:taxontype].id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +39,7 @@ class TaxonsController < ApplicationController
   # POST /taxons
   # POST /taxons.json
   def create
-    $log.debug(params)
+    $log.debug params
     $log.info("trying create a new taxon of #{session[:taxontype]}")
     @taxon = Taxon.new(params[:taxon])
 

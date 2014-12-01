@@ -17,5 +17,20 @@
           </li>
         <% end %>
   </ul>
+
+    <% if @taxons.length == 0 %>
+      <p>No hay taxonomía definida para este tipo</p>
+    <% else %>
+  <table class="table">
+      <tr>
+        <th>taxón</th>
+      </tr>
+      <% @taxons.each do |t| %>
+        <tr>
+          <td><%= t.name %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 <% end %>
 
