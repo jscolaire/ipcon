@@ -61,26 +61,12 @@ ActiveRecord::Schema.define(:version => 20141128171230) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "switches", :force => true do |t|
-    t.string   "name"
-    t.integer  "sip_id"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "tags", :force => true do |t|
     t.string   "tag"
     t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
-  end
-
-  create_table "taxon_types", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "taxons", :force => true do |t|

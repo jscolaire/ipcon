@@ -14,8 +14,9 @@ class Taxon < ActiveRecord::Base
   end
 
   def parent=(p)
+    $log.debug self.inspect
     $log.debug("parent is #{p}")
-    $log.debug("I am #{self.name} and my taxontype_id is #{self.taxontype_id}")
+    $log.debug("I am #{self.name} and my taxontype_id is #{taxontype_id}")
     tp = t = nil
     p.strip.split("->").reverse.each do |p|
       $log.debug("procesing #{p}")
@@ -31,4 +32,5 @@ class Taxon < ActiveRecord::Base
     self.taxon = t
     #Taxon.find_or_create_by_name(self.parent)
   end
+
 end

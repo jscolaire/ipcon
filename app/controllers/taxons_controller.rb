@@ -41,8 +41,12 @@ class TaxonsController < ApplicationController
   def create
     $log.debug params
     $log.info("trying create a new taxon of #{session[:taxontype]}")
-    @taxon = Taxon.new(params[:taxon])
-
+    #this method creates problems whith hierarchy
+    #@taxon = Taxon.new(params[:taxon])
+    @taxon = Taxon.new()
+    @taxon.name = params[:taxon][:name]
+    @taxon.taxontype_id = params[:taxon][:taxontype_id]
+    @taxon.parent = params[:taxon][:parent]
     respond_to do |format|
       if @taxon.save
         format.html { redirect_to @taxon, notice: 'Taxon was successfully created.' }

@@ -6,7 +6,7 @@ class TaxonomyController < ApplicationController
     $log.debug("Entering on taxonomy controller")
     @types = Taxontype.all
     session[:taxontype] = @types.first if session[:taxontype] == nil
-    @taxons = Taxon.where("taxontype_id = ? and taxon_id isnull",session[:taxontype].id)
+    @taxons = Taxon.where("taxontype_id = ? and taxon_id isnull",session[:taxontype].id) if session[:taxontype] != nil
   end
 
   def new
