@@ -17,7 +17,7 @@ module TaxonomyHelper
         },
       { :key => :edit, :name => name_for_button("edit"),
         :url => "/taxonomy/edit/#{session[:taxontype].id}",
-        :options => { :if => Proc.new { logged_in? and session[:taxontype] != nil },
+        :options => { :if => Proc.new { logged_in? and Taxontype.all.length != 0 },
                       :container_class => 'btn-group',
                       :class => 'btn',
                       :title => 'Editar tipo' } },

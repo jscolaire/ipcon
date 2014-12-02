@@ -5,7 +5,12 @@ class TaxonomyController < ApplicationController
   def index
     $log.debug("Entering on taxonomy controller")
     @types = Taxontype.all
-    session[:taxontype] = @types.first if session[:taxontype] == nil
+    if @types.length == 0
+      $log.debug "deleting session[:taxontype]"
+      session[:taxontype] = Taxontype.new
+    else
+      session[:taxontype] = @types.first if session[:taxontype] == nil
+    end
     @taxons = Taxon.where("taxontype_id = ? and taxon_id isnull",session[:taxontype].id) if session[:taxontype] != nil
   end
 
@@ -52,6 +57,7 @@ class TaxonomyController < ApplicationController
   def edit
     $log.info("editing type of taxonomy #{params[:id]}")
     @type = Taxontype.find(params[:id])
+    $log.info("editing type of taxonomy #{@type}")
   end
 
   def update
