@@ -49,6 +49,7 @@ class TaxonomyController < ApplicationController
 
   def delete
     $log.info("deleting type of taxonomy #{params[:id]}")
+    #TODO relation for destroy taxons of this taxonomytype
     Taxontype.delete(params[:id])
     session[:taxontype] = Taxontype.all.first
     redirect_to '/taxonomy'

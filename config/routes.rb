@@ -26,6 +26,7 @@ TemplateNew::Application.routes.draw do
   put 'taxonomy/:id' => 'taxonomy#update#id', :as => :taxontype
   #post 'taxonomy' => 'taxonomy#create', :as => :taxontypes
   get 'taxonomy/new' => 'taxonomy#new', :as => :new_taxontype
+  delete 'taxonomy/delete/:id' => 'taxonomy#delete#id', :as => :taxontype
 
 
 
