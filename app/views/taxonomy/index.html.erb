@@ -21,10 +21,17 @@
     <% if @taxons.length == 0 %>
       <p>No hay taxonomía definida para este tipo</p>
     <% else %>
-  <table class="table">
+      <table class="table table-condensed">
+        <tr>
+          <th>Taxón</th>
+          <th>Hijos</th>
+          <th>Activos</th>
+        </tr>
       <% @taxons.each do |t| %>
         <tr>
           <td><%= t.name %></td>
+          <td><%= t.taxons.length %></td>
+          <td>coming soon</td>
         </tr>
       <% end %>
     </table>

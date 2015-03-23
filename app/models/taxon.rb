@@ -6,6 +6,8 @@ class Taxon < ActiveRecord::Base
   belongs_to :taxon
   has_many :taxons
 
+  #has_many :activos
+
   validates_presence_of :name
 
   def parent
