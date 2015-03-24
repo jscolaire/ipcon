@@ -1,0 +1,15 @@
+<table class="table table-condensed">
+<tr>
+  <th>Taxón</th>
+  <th>Hijos</th>
+  <th>Activos</th>
+</tr>
+<% @taxons.each do |t| %>
+  <tr>
+    <td><%= link_to(t.name,taxontypes_path(:id => t.id)) %></td>
+    <td><%= t.taxons.length %></td>
+    <td>coming soon</td>
+  </tr>
+<% end %>
+</table>
+

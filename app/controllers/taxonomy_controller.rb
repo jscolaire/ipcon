@@ -4,6 +4,7 @@ class TaxonomyController < ApplicationController
   $log.add(LOGFILE)
   def index
     $log.debug("Entering on taxonomy controller")
+    $log.debug params
     @types = Taxontype.all
     if @types.length == 0
       $log.debug "deleting session[:taxontype]"
@@ -11,7 +12,14 @@ class TaxonomyController < ApplicationController
     else
       session[:taxontype] = @types.first if session[:taxontype] == nil
     end
-    @taxons = Taxon.where("taxontype_id = ? and taxon_id isnull",session[:taxontype].id) if session[:taxontype] != nil
+    if params[:id] == nil
+      $log.debug("No hay parámetros, vamos al índice general de taxonomía")
+      @taxons = Taxon.where("taxontype_id = ? and taxon_id isnull",session[:taxontype].id) if session[:taxontype] != nil
+      session[:taxon_parents] = nil
+    else
+      session[:taxon_parents] = Taxon.find(params[:id]).parents
+      @taxons = Taxon.where("taxontype_id = ? and taxon_id = ?",session[:taxontype].id,params[:id])
+    end
   end
 
   def new

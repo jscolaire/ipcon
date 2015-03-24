@@ -15,6 +15,13 @@ class Taxon < ActiveRecord::Base
     taxon.name
   end
 
+  def parents
+    return [self] if taxon == nil
+      a = taxon.parents
+      a.push self
+      return a
+  end
+
   def parent=(p)
     $log.debug self.inspect
     $log.debug("parent is #{p}")
@@ -33,6 +40,10 @@ class Taxon < ActiveRecord::Base
     end
     self.taxon = t
     #Taxon.find_or_create_by_name(self.parent)
+  end
+
+  def to_s
+    name
   end
 
 end

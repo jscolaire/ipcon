@@ -18,23 +18,18 @@
         <% end %>
   </ul>
 
-    <% if @taxons.length == 0 %>
-      <p>No hay taxonomía definida para este tipo</p>
-    <% else %>
-      <table class="table table-condensed">
-        <tr>
-          <th>Taxón</th>
-          <th>Hijos</th>
-          <th>Activos</th>
-        </tr>
-      <% @taxons.each do |t| %>
-        <tr>
-          <td><%= t.name %></td>
-          <td><%= t.taxons.length %></td>
-          <td>coming soon</td>
-        </tr>
+  <% if session[:taxon_parents] != nil %>
+    <ol class="breadcrumb">
+      <% $log.debug(session[:taxon_parents].length - 1) %>
+      <% session[:taxon_parents][0..(session[:taxon_parents].length - 1)].each do |b| %>
+        <li><%= b %></li>
       <% end %>
-    </table>
+    </ol>
+  <% end %>
+  <% if @taxons.length == 0 %>
+    <p>No hay taxonomía definida para este tipo</p>
+  <% else %>
+    <%= render "listtaxons" %>
   <% end %>
 <% end %>
 
