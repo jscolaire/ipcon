@@ -19,14 +19,15 @@ TemplateNew::Application.routes.draw do
   match 'switch_status' => 'networks#switch_status', :as => :switch_status
   match 'resolv' => 'networks#resolv', :as => :resolv
 
+  delete 'taxonomy/delete/:id' => 'taxonomy#delete#id', :as => :taxontype
   get 'taxonomy' => 'taxonomy#index', :as => :taxontypes
   post 'taxonomy' => 'taxonomy#create', :as => :taxontype
   get 'taxonomy/show/:id' => 'taxonomy#show#id', :as => :taxontype
   get 'taxonomy/edit/:id' => 'taxonomy#edit#id', :as => :taxontype
-  put 'taxonomy/:id' => 'taxonomy#update#id', :as => :taxontype
+  #put 'taxonomy/:id' => 'taxonomy#update#id', :as => :taxontype
   #post 'taxonomy' => 'taxonomy#create', :as => :taxontypes
   get 'taxonomy/new' => 'taxonomy#new', :as => :new_taxontype
-  delete 'taxonomy/delete/:id' => 'taxonomy#delete#id', :as => :taxontype
+  put 'taxonomy/update/:id' => 'taxonomy#update#id', :as => :taxontype
 
 
 

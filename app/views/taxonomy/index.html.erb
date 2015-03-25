@@ -18,13 +18,22 @@
         <% end %>
   </ul>
 
+      <%= render_navigation :items => taxontype_actions, :renderer => :links %>
   <% if session[:taxon_parents] != nil %>
     <ol class="breadcrumb">
-      <% $log.debug(session[:taxon_parents].length - 1) %>
-      <% session[:taxon_parents][0..(session[:taxon_parents].length - 1)].each do |b| %>
-        <li><%= b %></li>
+      <% $log.debug(session[:taxon_parents].map{ |x| x.name }) %>
+      <% a = session[:taxon_parents] %>
+      <% if a.length == 1 %>
+        <li><%= session[:taxon_parents].first %></li>
+      <% else %>
+        <% a[0..(a.length - 2)].each do |b| %>
+          <li><%= link_to(b,taxontypes_path(:id => b.id)) %></li>
+        <% end %>
+        <li><%= a.last %></li>
       <% end %>
     </ol>
+  <% else %>
+      <div>&nbsp;</div>
   <% end %>
   <% if @taxons.length == 0 %>
     <p>No hay taxonomía definida para este tipo</p>

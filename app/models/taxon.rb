@@ -11,8 +11,8 @@ class Taxon < ActiveRecord::Base
   validates_presence_of :name
 
   def parent
-    return "" if taxon == nil
-    taxon.name
+    return nil if taxon == nil
+    taxon
   end
 
   def parents

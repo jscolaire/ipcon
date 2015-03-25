@@ -4,7 +4,6 @@ class TaxonomyController < ApplicationController
   $log.add(LOGFILE)
   def index
     $log.debug("Entering on taxonomy controller")
-    $log.debug params
     @types = Taxontype.all
     if @types.length == 0
       $log.debug "deleting session[:taxontype]"

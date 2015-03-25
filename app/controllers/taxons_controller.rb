@@ -25,6 +25,10 @@ class TaxonsController < ApplicationController
     $log.info("requesting new taxon of #{session[:taxontype]}")
     @taxon = Taxon.new
     @taxon.taxontype_id = session[:taxontype].id
+    begin
+      @taxon.taxon = session[:taxon_parents].last
+    rescue
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,15 +49,18 @@ class TaxonsController < ApplicationController
     #@taxon = Taxon.new(params[:taxon])
     @taxon = Taxon.new()
     @taxon.name = params[:taxon][:name]
-    @taxon.taxontype_id = params[:taxon][:taxontype_id]
+    #@taxon.taxontype_id = params[:taxon][:taxontype_id]
+    @taxon.taxontype_id = session[:taxontype].id
     @taxon.parent = params[:taxon][:parent]
     respond_to do |format|
       if @taxon.save
-        format.html { redirect_to @taxon, notice: 'Taxon was successfully created.' }
-        format.json { render json: @taxon, status: :created, location: @taxon }
+        if @taxon.parent != nil
+        format.html { redirect_to taxontypes_path(:id => @taxon.parent.id), notice: 'Taxon was successfully created.' }
+        else
+        format.html { redirect_to taxontypes_path, notice: 'Taxon was successfully created.' }
+        end
       else
         format.html { render action: "new" }
-        format.json { render json: @taxon.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -29,4 +29,41 @@ module TaxonomyHelper
                       :class => 'btn', :title => "Borrar tipo" } },
     ]
   end
+
+  def taxontype_actions
+    if session[:taxon_parents] != nil
+      $log.debug("Debemos editar #{session[:taxon_parents].last}")
+    end
+     a = [
+      { :key => :add, :name => name_for_button("plus"),
+        :url => new_taxon_path,
+        :options => { :if => Proc.new { logged_in? and Taxontype.all.length != 0 },
+                      :container_class => 'btn-group',
+                      :class => "btn",
+                      :title => "Nuevo taxon" }
+      }
+    ]
+
+    if session[:taxon_parents] != nil
+      b = [
+        { :key => :edit, :name => name_for_button("edit"),
+          :url => edit_taxon_path(session[:taxon_parents].last),
+          :options => { :if => Proc.new { logged_in? and Taxontype.all.length != 0 },
+                        :container_class => 'btn-group',
+                        :class => "btn",
+                        :title => "Editar taxon" }
+        }
+      ]
+
+      return a + b
+    else
+      return a
+    end
+
+      #{
+        #:key => :edit, :name => name_for_button("edit"),
+        #:url => edit_taxon_path
+      #}
+    #]
+  end
 end
