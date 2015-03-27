@@ -9,6 +9,25 @@ class Taxon < ActiveRecord::Base
   #has_many :activos
 
   validates_presence_of :name
+  validate :unique_nombre
+
+
+  def unique_nombre
+    if self.taxon == nil
+      if Taxon.where("name = ? and taxontype_id = ?",self.name,self.taxontype_id) != nil
+        errors.add(:name,"Este nombre ya existe para este tipo de taxonomía")
+      end
+    else
+      $log.debug("Validating name, parent is #{self.parent}")
+      $log.debug("Looking for name = #{self.name} and taxon_id = #{self.taxon_id}")
+
+      $log.debug(Taxon.where("name = ? and taxon_id = ?",self.name,self.taxon_id))
+
+      if Taxon.where("name = ? and taxon_id = ?",self.name,self.taxon_id).length != 0
+        errors.add(:name,"Este nombre ya existe para el taxón del que depende")
+      end
+    end
+  end
 
   def parent
     return nil if taxon == nil

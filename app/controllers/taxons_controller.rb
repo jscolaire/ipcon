@@ -5,7 +5,7 @@ class TaxonsController < ApplicationController
   # GET /taxons
   # GET /taxons.json
   def index
-    redirect_to :taxonomy
+    redirect_to :taxontypes
   end
 
   # GET /taxons/1

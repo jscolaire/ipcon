@@ -8,13 +8,6 @@ module TaxonomyHelper
                       :class => "btn",
                       :title => "Nuevo tipo" }
         },
-      { :key => :add, :name => name_for_button("plus-sign"),
-        :url => new_taxon_path,
-        :options => { :if => Proc.new { logged_in? and Taxontype.all.length != 0 },
-                      :container_class => 'btn-group',
-                      :class => "btn",
-                      :title => "Nuevo taxon" }
-        },
       { :key => :edit, :name => name_for_button("edit"),
         :url => "/taxonomy/edit/#{session[:taxontype].id}",
         :options => { :if => Proc.new { logged_in? and Taxontype.all.length != 0 },
@@ -31,9 +24,6 @@ module TaxonomyHelper
   end
 
   def taxontype_actions
-    if session[:taxon_parents] != nil
-      $log.debug("Debemos editar #{session[:taxon_parents].last}")
-    end
      a = [
       { :key => :add, :name => name_for_button("plus"),
         :url => new_taxon_path,
@@ -52,7 +42,13 @@ module TaxonomyHelper
                         :container_class => 'btn-group',
                         :class => "btn",
                         :title => "Editar taxon" }
-        }
+        },
+        { :key => :destroy, :name => name_for_button("trash"),
+          :url => taxon_path(session[:taxon_parents].last),
+          :options => { :if => Proc.new { logged_in? and session[:taxontype] != nil },
+                        :method => :delete,
+                        :confirm => "¿ Estás seguro de borrar este tipo de taxonomía ?",
+                        :class => 'btn', :title => "Borrar tipo" } },
       ]
 
       return a + b
