@@ -4,6 +4,14 @@
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :raw_tags_list %>
+
+  <% @taxontypes.each do |tt| %>
+    <div class="control-group string optional">
+      <%= f.label "#{tt}" %>
+      <%= text_field_tag tt, nil , :class => "string optional" %>
+    </div>
+  <% end %>
+
   <%= f.submit "Actualizar", :class => 'btn btn-primary' %>
   <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
 <% end %>

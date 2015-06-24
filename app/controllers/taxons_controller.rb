@@ -23,7 +23,7 @@ class TaxonsController < ApplicationController
   # GET /taxons/new.json
   def new
     $log.info("requesting new taxon of #{session[:taxontype]}")
-    @taxon = Taxon.new
+    @taxon = Taxon.new()
     @taxon.taxontype_id = session[:taxontype].id
     begin
       @taxon.taxon = session[:taxon_parents].last
@@ -45,13 +45,18 @@ class TaxonsController < ApplicationController
   def create
     $log.debug params
     $log.info("trying create a new taxon of #{session[:taxontype]}")
+    $log.info("trying create taxon #{params[:taxon][:name]}")
     #this method creates problems whith hierarchy
-    #@taxon = Taxon.new(params[:taxon])
     @taxon = Taxon.new()
-    @taxon.name = params[:taxon][:name]
-    #@taxon.taxontype_id = params[:taxon][:taxontype_id]
-    @taxon.taxontype_id = session[:taxontype].id
-    @taxon.parent = params[:taxon][:parent]
+    #set name and parents if it needs
+    @taxon.set_name_with_parents(params[:taxon][:name],session[:taxontype])
+    #@taxon.taxontype_id = session[:taxontype].id
+    #if params[:taxon][:parent].empty?
+      #$log.debug("taxon parent not defined")
+      #@taxon.parent == nil
+    #else
+      #@taxon.parent = params[:taxon][:parent]
+    #end
     respond_to do |format|
       if @taxon.save
         if @taxon.parent != nil

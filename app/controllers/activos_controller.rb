@@ -45,6 +45,7 @@ class ActivosController < ApplicationController
   # GET /activos/1/edit
   def edit
     @activo = Activo.find(params[:id])
+    @taxontypes = Taxontype.all
   end
 
   # POST /activos

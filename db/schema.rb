@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150325162143) do
+ActiveRecord::Schema.define(:version => 20150515163143) do
+
+  create_table "active_taxons", :force => true do |t|
+    t.integer  "activo_id"
+    t.integer  "taxon_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "activos", :force => true do |t|
     t.string   "name"
