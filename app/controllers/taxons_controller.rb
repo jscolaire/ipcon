@@ -24,11 +24,12 @@ class TaxonsController < ApplicationController
   def new
     $log.info("requesting new taxon of #{session[:taxontype]}")
     @taxon = Taxon.new()
-    @taxon.taxontype_id = session[:taxontype].id
-    begin
-      @taxon.taxon = session[:taxon_parents].last
-    rescue
-    end
+		@taxon.taxontype = session[:taxontype]
+    #@taxon.taxontype_id = session[:taxontype].id
+    #begin
+      #@taxon.taxon = session[:taxon_parents].last
+    #rescue
+    #end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -59,6 +60,7 @@ class TaxonsController < ApplicationController
     #end
     respond_to do |format|
       if @taxon.save
+        @taxon.taxontype.reload
         if @taxon.parent != nil
         format.html { redirect_to taxontypes_path(:id => @taxon.parent.id), notice: 'Taxon was successfully created.' }
         else

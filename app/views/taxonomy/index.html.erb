@@ -10,12 +10,12 @@
     <% @types.each do |t| %>
       <% if t == session[:taxontype] %>
         <li class="active">
-        <% else %>
-          <li>
-          <% end %>
+      <% else %>
+        <li>
+      <% end %>
           <%= link_to t.name,"/taxonomy/show/#{t.id}" %>
-          </li>
-        <% end %>
+        </li>
+    <% end %>
   </ul>
 
   <div class="row-fluid">

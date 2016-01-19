@@ -3,6 +3,7 @@ class Taxon < ActiveRecord::Base
   attr_accessible :parent
   attr_accessible :taxontype_id
 
+  belongs_to :taxontype
   belongs_to :taxon
   has_many :taxons, :dependent => :destroy
 
@@ -74,7 +75,7 @@ class Taxon < ActiveRecord::Base
     return if alltaxons.length == 0
     $log.debug("procesing taxon and parents #{alltaxons.to_s}")
     self.name = alltaxons.first.to_s.strip
-    self.taxontype_id = taxontype.id
+    self.taxontype = taxontype
     return if alltaxons.length == 1
     alltaxons.shift
     $log.debug("parents are #{alltaxons.to_s}")

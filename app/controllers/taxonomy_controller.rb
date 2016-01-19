@@ -4,6 +4,7 @@ class TaxonomyController < ApplicationController
   $log.add(LOGFILE)
   def index
     $log.debug("Entering on taxonomy controller")
+    $log.debug("active taxontype is #{session[:taxontype]}")
     @types = Taxontype.all
     if @types.length == 0
       $log.debug "deleting session[:taxontype]"
@@ -11,13 +12,14 @@ class TaxonomyController < ApplicationController
     else
       session[:taxontype] = @types.first if session[:taxontype] == nil
     end
+    $log.debug("active taxontype is now #{session[:taxontype]}")
     if params[:id] == nil
       $log.debug("No hay parámetros, vamos al índice general de taxonomía")
-      @taxons = Taxon.where("taxontype_id = ? and taxon_id isnull",session[:taxontype].id) if session[:taxontype] != nil
+			@taxons = session[:taxontype].taxons if session[:taxontype] != nil
       session[:taxon_parents] = nil
     else
       session[:taxon_parents] = Taxon.find(params[:id]).parents
-      @taxons = Taxon.where("taxontype_id = ? and taxon_id = ?",session[:taxontype].id,params[:id])
+			@taxons = session[:taxontype].taxons
     end
   end
 
@@ -37,9 +39,9 @@ class TaxonomyController < ApplicationController
     respond_to do |format|
       if @type.save
         $log.info("Created #{@type.name} as type of taxonomy successfully")
+        session[:taxontype] = @type
         flash[:info] = "El tipo de taxonomía ha sido creado correctamente"
         format.html { redirect_to('/taxonomy') }
-        session[:taxontype] = @type
       else
         $log.error("Type of taxonomy wasn't created successfully")
         flash[:error] = @type.errors[:name].first
@@ -57,7 +59,7 @@ class TaxonomyController < ApplicationController
   def delete
     $log.info("deleting type of taxonomy #{params[:id]}")
     #TODO relation for destroy taxons of this taxonomytype
-    Taxontype.delete(params[:id])
+    Taxontype.find(params[:id]).destroy
     session[:taxontype] = Taxontype.all.first
     redirect_to '/taxonomy'
   end

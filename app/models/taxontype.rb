@@ -6,6 +6,10 @@ class Taxontype < ActiveRecord::Base
 
   before_validation :normalize
 
+	has_many :taxons, 
+		:dependent => :delete_all,
+		:order => :name
+
   def normalize
     self.name = self.name.strip
   end
