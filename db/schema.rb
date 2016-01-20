@@ -11,19 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150515163143) do
+ActiveRecord::Schema.define(:version => 20150325162143) do
 
-  create_table "active_taxons", :force => true do |t|
-    t.integer  "activo_id"
-    t.integer  "taxon_id"
+  create_table "activo_tags", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "activos", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "description"
     t.string   "os"
   end
@@ -40,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20150515163143) do
     t.boolean  "gw"
     t.boolean  "enabled"
     t.boolean  "reserved"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "activo_id"
     t.boolean  "hpsrp"
     t.boolean  "temporal"
@@ -53,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20150515163143) do
   create_table "networks", :force => true do |t|
     t.string   "prefix"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "vlan_id"
   end
 
@@ -68,19 +66,11 @@ ActiveRecord::Schema.define(:version => 20150515163143) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "switches", :force => true do |t|
-    t.string   "name"
-    t.integer  "sip_id"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "tags", :force => true do |t|
     t.string   "tag"
     t.integer  "count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "description"
   end
 
@@ -114,8 +104,8 @@ ActiveRecord::Schema.define(:version => 20150515163143) do
   create_table "vlans", :force => true do |t|
     t.integer  "tag"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

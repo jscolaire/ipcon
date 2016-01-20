@@ -59,6 +59,8 @@ class TaxonsController < ApplicationController
       #@taxon.parent = params[:taxon][:parent]
     #end
     respond_to do |format|
+      @taxon.taxontype = session[:taxontype]
+      @taxon.taxon = session[:taxon] if session[:taxon] != nil
       if @taxon.save
         @taxon.taxontype.reload
         if @taxon.parent != nil

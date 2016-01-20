@@ -7,6 +7,7 @@ class Taxontype < ActiveRecord::Base
   before_validation :normalize
 
 	has_many :taxons, 
+    :conditions => ["taxon_id = ?",-1],
 		:dependent => :delete_all,
 		:order => :name
 

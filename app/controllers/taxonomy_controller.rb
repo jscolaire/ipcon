@@ -17,9 +17,11 @@ class TaxonomyController < ApplicationController
       $log.debug("No hay parámetros, vamos al índice general de taxonomía")
 			@taxons = session[:taxontype].taxons if session[:taxontype] != nil
       session[:taxon_parents] = nil
+      session[:taxon] = nil
     else
-      session[:taxon_parents] = Taxon.find(params[:id]).parents
-			@taxons = session[:taxontype].taxons
+      session[:taxon] = Taxon.find(params[:id])
+      session[:taxon_parents] = session[:taxon].parents
+			@taxons = session[:taxon].taxons
     end
   end
 
