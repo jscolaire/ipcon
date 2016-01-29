@@ -1,5 +1,8 @@
 ---
-glyphicons-halflings-white.png: glyphicons-halflings-white.png
-glyphicons-halflings.png: glyphicons-halflings.png
-application.js: application.js
-application.css: application.css
+semantic-ui/icons.eot: semantic-ui/icons.eot
+semantic-ui/icons.otf: semantic-ui/icons.otf
+semantic-ui/icons.svg: semantic-ui/icons.svg
+semantic-ui/icons.ttf: semantic-ui/icons.ttf
+semantic-ui/icons.woff: semantic-ui/icons.woff
+semantic-ui/icons.woff2: semantic-ui/icons.woff2
+semantic-ui/flags.png: semantic-ui/flags.png

@@ -8,15 +8,16 @@ gem 'rails', '3.2.3'
 
 group :development do
     gem 'nifty-generators'
-    gem 'haml'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass'
+  gem 'sass-rails'
   gem 'coffee-rails', '~> 3.2.1'
-#  gem 'bootstrap-sass'
+  gem 'compass'
+  gem 'semantic-ui-sass'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platform => :ruby
@@ -35,8 +36,6 @@ gem 'sqlite3'
 gem 'simple-navigation'
 gem 'simple_form'
 gem 'bcrypt-ruby', :require => "bcrypt"
-gem 'bootstrap-sass'
-gem 'bootstrap-will_paginate'
 gem 'prawn_rails'
 gem 'spreadsheet'
 
