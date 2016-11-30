@@ -13,15 +13,10 @@
 
 ActiveRecord::Schema.define(:version => 20150325162143) do
 
-  create_table "activo_tags", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "activos", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "description"
     t.string   "os"
   end
@@ -38,8 +33,8 @@ ActiveRecord::Schema.define(:version => 20150325162143) do
     t.boolean  "gw"
     t.boolean  "enabled"
     t.boolean  "reserved"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "activo_id"
     t.boolean  "hpsrp"
     t.boolean  "temporal"
@@ -51,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20150325162143) do
   create_table "networks", :force => true do |t|
     t.string   "prefix"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "vlan_id"
   end
 
@@ -69,17 +64,17 @@ ActiveRecord::Schema.define(:version => 20150325162143) do
   create_table "tags", :force => true do |t|
     t.string   "tag"
     t.integer  "count"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
   end
 
   create_table "taxons", :force => true do |t|
     t.string   "name"
-    t.integer  "taxon_id"
-    t.integer  "taxontype_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "taxon_id",     :default => -1
+    t.integer  "taxontype_id", :default => -1
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "taxontypes", :force => true do |t|
@@ -104,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20150325162143) do
   create_table "vlans", :force => true do |t|
     t.integer  "tag"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
