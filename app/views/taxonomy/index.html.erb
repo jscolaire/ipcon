@@ -1,0 +1,48 @@
+<% title "Taxonomía" %>
+<% content_for :actions do %>
+  <% render_navigation :items => taxontypes_actions, :renderer => :links %>
+<% end %>
+
+<% if @types.length == 0 %>
+  <p>No hay tipos de taxonomía definidos</p>
+<% else %>
+  <ul class="nav nav-tabs">
+    <% @types.each do |t| %>
+      <% if t == session[:taxontype] %>
+        <li class="active">
+      <% else %>
+        <li>
+      <% end %>
+          <%= link_to t.name,"/taxonomy/show/#{t.id}" %>
+        </li>
+    <% end %>
+  </ul>
+
+  <div class="row-fluid">
+    <div class="span10">
+      <% if session[:taxon_parents] != nil %>
+        <ol class="breadcrumb">
+          <% $log.debug(session[:taxon_parents].map{ |x| x.name }) %>
+          <% a = session[:taxon_parents] %>
+          <% if a.length == 1 %>
+            <li><%= session[:taxon_parents].first %></li>
+          <% else %>
+            <% a[0..(a.length - 2)].each do |b| %>
+              <li><%= link_to(b,taxontypes_path(:id => b.id)) %></li>
+            <% end %>
+            <li><%= a.last %></li>
+          <% end %>
+        </ol>
+      <% else %>
+        <div class="breadcrumb">&nbsp;</div>
+      <% end %>
+    </div>
+    <div class="span2"><%= render_navigation :items => taxontype_actions, :renderer => :links %></div>
+  </div>
+  <% if @taxons.length == 0 %>
+    <p>No hay taxonomía definida para este tipo</p>
+  <% else %>
+    <%= render "listtaxons" %>
+  <% end %>
+<% end %>
+

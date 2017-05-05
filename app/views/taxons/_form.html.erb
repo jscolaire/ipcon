@@ -1,0 +1,7 @@
+<%= simple_form_for @taxon, :html => { :class => 'form-horizontal well' } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, :label => "Taxón" %>
+  <%#<%= f.input :parent, :label => "Taxón(es) superior(es)" %>%>
+  <%= f.submit "Grabar taxón", :class => 'btn btn-primary' %>
+  <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
+<% end %>

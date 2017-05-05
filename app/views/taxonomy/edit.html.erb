@@ -1,0 +1,7 @@
+<% title "Edición de un tipo de taxonomía" %>
+<%= simple_form_for @type, :html => { :class => 'form-horizontal well' } do |f| %>
+  <%= f.input :name, :label => "Tipo de taxonomía" %>
+  <%= f.submit "Editar tipo", :class => 'btn btn-primary' %>
+  <%= link_to "Cancelar", session[:return_to], :class => "btn btn-sucess" %>
+<% end %>
+

@@ -54,6 +54,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :networks, 'Vlans', vlans_path
     primary.item :activos, 'Activos', activos_path, :highlights_on => /\/activos/
     primary.item :tags, 'Etiquetas', tags_path, :highlights_on => /\/tags/
+    primary.item :taxonomy, 'Taxonomía', "/taxonomy", :higlights_on => /\/taxonomy/
 
     # Add an item which has a sub navigation (same params, but with block)
     #primary.item :key_2, 'name', url, options do |sub_nav|
