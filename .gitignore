@@ -6,3 +6,4 @@ tmp/
 old
 *.swp
 vendor/
+.bash_history

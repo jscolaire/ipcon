@@ -1,0 +1,9 @@
+ipcon:
+  image: ipcon
+  volumes:
+    - ".:/apps/ipcon"
+  ports:
+    - "80:3000"
+  user: oper
+  working_dir: /apps/ipcon
+  command: bundle exec thin start -e development -l log/thin.log

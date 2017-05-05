@@ -73,6 +73,12 @@ class ActivosController < ApplicationController
     $log.info("Trying update #{@activo}")
     @activo.update_tags(params[:activo][:raw_tags_list]) if params[:activo][:raw_tags_list] != nil
     params[:activo].delete :raw_tags_list
+    puts "===================================="
+    puts "===================================="
+    puts "===================================="
+    puts "===================================="
+    puts params
+    $log.info params
     respond_to do |format|
       if @activo.update_attributes(params[:activo])
         flash[:success] = 'Activo modificado correctamente.'
